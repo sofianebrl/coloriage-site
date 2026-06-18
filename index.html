@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>ColorDream ✨ - Coloriage & Dessin</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Pacifico&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🎨</span>
+        <span class="logo-text">ColorDream</span>
+      </div>
+      <p class="logo-sub">Ton espace créatif</p>
+    </div>
+    <div class="header-bubbles">
+      <div class="bubble b1"></div>
+      <div class="bubble b2"></div>
+      <div class="bubble b3"></div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Colorie & Dessine<br /><span class="gradient-text">avec ton style</span></h1>
+      <p>Des centaines de coloriages à portée de ton Apple Pencil ✏️</p>
+      <a href="#categories" class="btn-primary">Explorer les coloriages</a>
+    </div>
+    <div class="hero-art">
+      <div class="floating-emoji e1">🌸</div>
+      <div class="floating-emoji e2">⭐</div>
+      <div class="floating-emoji e3">🦋</div>
+      <div class="floating-emoji e4">🌈</div>
+      <div class="floating-emoji e5">💫</div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="categories" id="categories">
+    <div class="container">
+      <h2 class="section-title">Choisir une catégorie</h2>
+      <div class="category-grid">
+
+        <div class="category-card" data-cat="princesses" style="--c1:#ff6eb4;--c2:#ff9de2;">
+          <div class="cat-icon">👸</div>
+          <h3>Princesses</h3>
+          <p>Cendrillon, Belle, Raiponce...</p>
+          <span class="cat-count">12 coloriages</span>
+        </div>
+
+        <div class="category-card" data-cat="animaux" style="--c1:#43c6ac;--c2:#91f5c4;">
+          <div class="cat-icon">🦁</div>
+          <h3>Animaux</h3>
+          <p>Lion, Papillon, Licorne...</p>
+          <span class="cat-count">15 coloriages</span>
+        </div>
+
+        <div class="category-card" data-cat="manga" style="--c1:#764ba2;--c2:#c471ed;">
+          <div class="cat-icon">⚡</div>
+          <h3>Manga & Anime</h3>
+          <p>Personnages kawaii...</p>
+          <span class="cat-count">10 coloriages</span>
+        </div>
+
+        <div class="category-card" data-cat="mandala" style="--c1:#f7971e;--c2:#ffd200;">
+          <div class="cat-icon">🌀</div>
+          <h3>Mandalas</h3>
+          <p>Motifs zen et relaxants...</p>
+          <span class="cat-count">8 coloriages</span>
+        </div>
+
+        <div class="category-card" data-cat="nature" style="--c1:#56ab2f;--c2:#a8e063;">
+          <div class="cat-icon">🌺</div>
+          <h3>Nature & Fleurs</h3>
+          <p>Roses, Jardins, Forêts...</p>
+          <span class="cat-count">14 coloriages</span>
+        </div>
+
+        <div class="category-card" data-cat="fee" style="--c1:#4facfe;--c2:#00f2fe;">
+          <div class="cat-icon">🧚</div>
+          <h3>Fées & Magie</h3>
+          <p>Univers féeriques...</p>
+          <span class="cat-count">9 coloriages</span>
+        </div>
+
+        <div class="category-card" data-cat="noel" style="--c1:#e52d27;--c2:#b31217;">
+          <div class="cat-icon">🎄</div>
+          <h3>Noël & Fêtes</h3>
+          <p>Père Noël, Sapins...</p>
+          <span class="cat-count">11 coloriages</span>
+        </div>
+
+        <div class="category-card" data-cat="jeux" style="--c1:#e52d27;--c2:#f7971e;">
+          <div class="cat-icon">🎮</div>
+          <h3>Jeux Vidéo</h3>
+          <p>Mario, Pokémon...</p>
+          <span class="cat-count">1 coloriage</span>
+        </div>
+
+        <div class="category-card" data-cat="libre" style="--c1:#667eea;--c2:#764ba2;">
+          <div class="cat-icon">✏️</div>
+          <h3>Dessin Libre</h3>
+          <p>Créé ton propre chef-d'œuvre</p>
+          <span class="cat-count">Canvas vierge</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL GALERIE -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+      <h2 class="modal-title" id="modalTitle">Catégorie</h2>
+      <div class="coloring-grid" id="coloringGrid"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Fait avec ❤️ pour toi 🎨</p>
+  </footer>
+
+  <script src="svgdata.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

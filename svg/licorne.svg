@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 420" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- QUEUE (derrière) -->
+  <path d="M118 240 Q80 210 68 250 Q58 282 75 308 Q88 328 108 322 Q118 316 115 300" stroke-width="2.5"/>
+  <path d="M118 244 Q72 228 65 268 Q60 295 82 315" stroke-width="1.5"/>
+  <path d="M120 250 Q78 252 72 282 Q70 300 88 312" stroke-width="1.5"/>
+  <path d="M120 255 Q84 264 80 288 Q80 305 95 312" stroke-width="1.2"/>
+  <!-- Flammes queue -->
+  <path d="M108 322 Q115 338 108 352 Q102 364 110 372" stroke-width="1.5"/>
+  <path d="M115 318 Q124 336 118 352 Q113 366 120 376" stroke-width="1.5"/>
+  <path d="M100 324 Q104 340 96 354 Q90 366 97 374" stroke-width="1.5"/>
+
+  <!-- CORPS -->
+  <path d="M118 250 Q118 200 140 185 Q162 170 200 168 Q255 166 295 178 Q330 190 348 218 Q362 242 360 268 Q358 295 340 312 Q318 330 285 336 Q258 340 230 338 Q190 336 160 324 Q134 312 122 296 Q112 278 118 250Z"/>
+
+  <!-- VENTRE (ligne douce) -->
+  <path d="M145 295 Q200 310 265 300 Q305 293 330 278" stroke-width="1.2"/>
+
+  <!-- PATTES ARRIÈRE -->
+  <!-- Patte AR gauche -->
+  <path d="M148 330 Q142 356 138 384 Q136 398 140 408"/>
+  <path d="M162 334 Q158 360 156 388 Q156 402 160 410"/>
+  <!-- Sabot AR gauche -->
+  <path d="M136 406 Q138 414 148 416 Q158 418 164 412 Q166 404 160 402"/>
+  <path d="M138 410 Q148 418 162 410" stroke-width="1.2"/>
+
+  <!-- Patte AR droite -->
+  <path d="M230 338 Q228 364 228 390 Q228 404 232 412"/>
+  <path d="M244 336 Q244 362 246 388 Q248 402 252 410"/>
+  <!-- Sabot AR droite -->
+  <path d="M228 410 Q232 418 242 419 Q252 420 256 414 Q258 406 252 402"/>
+  <path d="M230 414 Q242 420 256 412" stroke-width="1.2"/>
+
+  <!-- COU -->
+  <path d="M295 178 Q318 165 335 148 Q348 134 352 118"/>
+  <path d="M310 174 Q332 160 345 142 Q356 127 358 112"/>
+  <!-- Crinière sur le cou -->
+  <path d="M300 176 Q315 158 325 140" stroke-width="3"/>
+  <path d="M306 170 Q320 152 330 134" stroke-width="2.5"/>
+  <path d="M312 166 Q324 148 332 130" stroke-width="2"/>
+  <path d="M318 162 Q328 146 334 128" stroke-width="1.5"/>
+
+  <!-- TÊTE -->
+  <path d="M352 118 Q365 100 372 82 Q376 66 368 54 Q358 44 345 46 Q332 48 322 62 Q312 76 308 94 Q304 110 308 125 Q316 148 335 155 Q355 160 370 148 Q382 136 380 118 Q378 102 366 94"/>
+
+  <!-- MUSEAU -->
+  <path d="M308 125 Q298 132 290 142 Q284 152 285 162 Q287 174 298 178 Q310 180 320 172 Q330 162 328 150 Q326 138 316 132"/>
+  <!-- Narines -->
+  <path d="M292 158 Q296 155 300 158 Q298 162 294 160Z" stroke-width="1.5"/>
+  <path d="M306 164 Q310 161 314 164 Q312 168 308 166Z" stroke-width="1.5"/>
+  <!-- Bouche licorne -->
+  <path d="M290 168 Q298 174 308 172" stroke-width="1.5"/>
+
+  <!-- OEIL -->
+  <path d="M335 100 Q342 90 354 92 Q366 94 370 104 Q370 116 360 120 Q348 122 340 114 Q334 108 335 100Z"/>
+  <ellipse cx="353" cy="106" rx="9" ry="10" fill="#1a1a1a"/>
+  <circle cx="348" cy="101" r="4" fill="white"/>
+  <circle cx="356" cy="110" r="2" fill="white"/>
+  <!-- Cils licorne -->
+  <path d="M335 100 L330 94 M340 96 L337 90 M347 94 L346 87 M354 93 L355 86 M361 95 L364 89 M368 100 L372 95"/>
+  <path d="M340 118 L337 124 M348 120 L347 126 M356 118 L358 124"/>
+
+  <!-- CORNE SPIRALÉE -->
+  <path d="M358 78 Q362 60 366 42 Q368 30 364 18"/>
+  <path d="M362 76 Q368 58 370 40 Q371 28 366 16"/>
+  <!-- Spirales corne -->
+  <path d="M358 72 Q366 68 370 62" stroke-width="1.2"/>
+  <path d="M360 62 Q368 58 370 52" stroke-width="1.2"/>
+  <path d="M362 52 Q369 48 369 42" stroke-width="1.2"/>
+  <path d="M363 42 Q368 38 367 32" stroke-width="1.2"/>
+  <path d="M364 32 Q368 28 366 22" stroke-width="1.2"/>
+
+  <!-- OREILLES -->
+  <path d="M340 70 Q332 48 342 38 Q352 30 358 50"/>
+  <path d="M342 68 Q336 52 344 44 Q352 38 356 52" stroke-width="1.2"/>
+
+  <!-- CRINIÈRE (longue et ondulée) -->
+  <path d="M340 72 Q320 80 305 100 Q292 118 288 140 Q285 160 290 180" stroke-width="3"/>
+  <path d="M344 70 Q326 78 312 98 Q300 116 296 138 Q293 158 298 178" stroke-width="2.5"/>
+  <path d="M348 68 Q333 76 320 96 Q308 114 305 136 Q302 156 308 175" stroke-width="2"/>
+  <path d="M350 67 Q338 74 328 92 Q318 110 315 132 Q312 152 317 170" stroke-width="1.5"/>
+  <path d="M352 66 Q342 72 334 88 Q325 106 322 128 Q320 148 325 165" stroke-width="1.2"/>
+
+  <!-- PATTES AVANT -->
+  <!-- Patte AV gauche -->
+  <path d="M200 336 Q195 360 192 390 Q190 406 192 416"/>
+  <path d="M215 336 Q212 360 210 390 Q210 406 213 415"/>
+  <!-- Sabot AV gauche -->
+  <path d="M189 414 Q193 422 203 423 Q213 424 217 417 Q218 408 212 406"/>
+  <path d="M191 418 Q203 425 216 416" stroke-width="1.2"/>
+
+  <!-- Patte AV droite -->
+  <path d="M295 330 Q295 355 296 382 Q298 398 302 408"/>
+  <path d="M310 328 Q311 353 314 380 Q317 396 320 406"/>
+  <!-- Sabot AV droite -->
+  <path d="M299 406 Q303 415 313 416 Q323 416 326 408 Q326 400 320 398"/>
+  <path d="M301 410 Q313 418 325 406" stroke-width="1.2"/>
+
+  <!-- ÉTOILES DÉCORATIVES -->
+  <path d="M175 200 L178 210 L188 210 L180 216 L183 226 L175 220 L167 226 L170 216 L162 210 L172 210Z" stroke-width="1.2"/>
+  <path d="M420 150 L423 158 L431 158 L425 163 L427 171 L420 166 L413 171 L415 163 L409 158 L417 158Z" stroke-width="1.2"/>
+  <path d="M430 260 L432 266 L438 266 L434 270 L435 276 L430 272 L425 276 L426 270 L422 266 L428 266Z" stroke-width="1.2"/>
+  <path d="M60 180 L62 186 L68 186 L64 190 L65 196 L60 192 L55 196 L56 190 L52 186 L58 186Z" stroke-width="1.2"/>
+
+  <!-- PETITS NUAGES -->
+  <path d="M55 120 Q62 110 72 115 Q76 104 88 108 Q96 100 104 108 Q112 104 110 116 Q118 120 110 128 Z" stroke-width="1.5"/>
+  <path d="M405 180 Q410 172 418 176 Q420 168 430 171 Q436 165 442 171 Q448 168 447 178 Q453 181 447 188Z" stroke-width="1.5"/>
+
+</svg>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- TIGE PRINCIPALE -->
+  <path d="M200 335 Q196 375 194 420 Q193 445 196 468" stroke-width="3"/>
+
+  <!-- TIGE SECONDAIRE GAUCHE -->
+  <path d="M197 390 Q175 375 162 358 Q152 344 155 330" stroke-width="2"/>
+
+  <!-- TIGE SECONDAIRE DROITE -->
+  <path d="M195 410 Q218 398 232 380 Q243 365 238 350" stroke-width="2"/>
+
+  <!-- ÉPINES -->
+  <path d="M196 368 L183 358" stroke-width="2"/>
+  <path d="M195 380 L182 374" stroke-width="2"/>
+  <path d="M195 400 L207 393" stroke-width="2"/>
+  <path d="M195 420 L183 415" stroke-width="2"/>
+  <path d="M195 440 L206 433" stroke-width="2"/>
+
+  <!-- FEUILLE GAUCHE GRANDE -->
+  <path d="M162 358 Q130 342 118 312 Q112 295 122 282 Q134 270 155 278 Q172 285 180 305 Q188 322 182 340 Q175 352 162 358Z"/>
+  <!-- Nervure centrale feuille gauche -->
+  <path d="M162 358 Q148 332 140 308 Q135 290 142 280" stroke-width="1.5"/>
+  <!-- Nervures secondaires -->
+  <path d="M148 332 Q138 328 132 318" stroke-width="1.2"/>
+  <path d="M152 318 Q143 312 139 300" stroke-width="1.2"/>
+  <path d="M156 306 Q150 298 148 288" stroke-width="1.2"/>
+  <path d="M160 296 Q156 286 155 278" stroke-width="1.2"/>
+
+  <!-- FEUILLE DROITE GRANDE -->
+  <path d="M238 350 Q268 336 282 308 Q290 290 278 278 Q266 268 245 275 Q228 282 220 302 Q212 320 218 338 Q224 350 238 350Z"/>
+  <!-- Nervure centrale feuille droite -->
+  <path d="M238 350 Q252 326 258 302 Q264 282 256 272" stroke-width="1.5"/>
+  <!-- Nervures secondaires -->
+  <path d="M252 326 Q262 322 268 312" stroke-width="1.2"/>
+  <path d="M248 312 Q257 306 261 296" stroke-width="1.2"/>
+  <path d="M244 300 Q250 290 252 280" stroke-width="1.2"/>
+
+  <!-- PETITE FEUILLE BASSE -->
+  <path d="M195 445 Q175 438 166 422 Q160 408 168 400 Q178 393 190 400 Q199 407 198 420Z"/>
+  <path d="M195 445 Q182 425 176 408" stroke-width="1.2"/>
+
+  <!-- SÉPALES -->
+  <path d="M178 336 Q182 308 200 300 Q218 308 222 336"/>
+  <path d="M174 330 Q170 304 185 292 Q196 285 200 300"/>
+  <path d="M226 330 Q230 304 215 292 Q204 285 200 300"/>
+  <path d="M180 330 Q185 312 200 310 Q215 312 220 330" stroke-width="1.2"/>
+  <path d="M176 325 Q174 306 188 296" stroke-width="1.2"/>
+  <path d="M224 325 Q226 306 212 296" stroke-width="1.2"/>
+
+  <!-- PÉTALES EXTÉRIEURS (couche 1) -->
+  <path d="M200 300 Q162 275 148 240 Q140 214 150 196 Q162 180 182 184 Q196 188 204 205"/>
+  <path d="M200 300 Q238 275 252 240 Q260 214 250 196 Q238 180 218 184 Q204 188 196 205"/>
+  <path d="M200 300 Q175 262 160 240 Q148 220 154 200 Q162 184 178 190"/>
+  <path d="M200 300 Q225 262 240 240 Q252 220 246 200 Q238 184 222 190"/>
+  <path d="M200 300 Q180 265 172 242 Q165 220 175 206 Q185 196 196 204"/>
+  <path d="M200 300 Q220 265 228 242 Q235 220 225 206 Q215 196 204 204"/>
+
+  <!-- PÉTALES COUCHE 2 (intermédiaires) -->
+  <path d="M200 295 Q177 268 168 248 Q162 232 170 218 Q178 206 192 210"/>
+  <path d="M200 295 Q223 268 232 248 Q238 232 230 218 Q222 206 208 210"/>
+  <path d="M200 295 Q183 270 178 252 Q174 236 182 224 Q190 214 200 218"/>
+  <path d="M200 295 Q217 270 222 252 Q226 236 218 224 Q210 214 200 218"/>
+
+  <!-- PÉTALES INTÉRIEURS (couche 3) -->
+  <path d="M200 290 Q183 270 180 256 Q178 244 186 236 Q194 230 200 234"/>
+  <path d="M200 290 Q217 270 220 256 Q222 244 214 236 Q206 230 200 234"/>
+  <path d="M200 290 Q187 272 186 260 Q185 250 192 244 Q197 240 200 244"/>
+  <path d="M200 290 Q213 272 214 260 Q215 250 208 244 Q203 240 200 244"/>
+
+  <!-- COEUR DE LA ROSE -->
+  <path d="M200 280 Q190 268 188 260 Q188 252 194 250 Q200 250 200 254 Q200 250 206 250 Q212 252 212 260 Q210 268 200 280Z"/>
+  <!-- Spirale intérieure -->
+  <path d="M200 272 Q194 264 194 258 Q194 254 198 253" stroke-width="1.2"/>
+
+  <!-- ROSÉE / GOUTTES -->
+  <path d="M155 240 Q152 248 155 254 Q158 248 155 240Z"/>
+  <path d="M245 238 Q242 246 245 252 Q248 246 245 238Z"/>
+  <path d="M170 198 Q168 204 170 208 Q172 204 170 198Z"/>
+  <path d="M232 195 Q230 201 232 205 Q234 201 232 195Z"/>
+
+  <!-- PETITE FLEUR BOUTON EN BAS -->
+  <path d="M194 468 Q180 464 174 454 Q170 445 175 438 Q180 432 190 435 Q198 437 200 446"/>
+  <path d="M194 468 Q200 464 205 458 Q210 450 206 442 Q202 436 196 438"/>
+  <circle cx="200" cy="452" r="8"/>
+  <circle cx="200" cy="452" r="4"/>
+
+</svg>

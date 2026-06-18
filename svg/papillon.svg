@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 420" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- AILE SUPÉRIEURE GAUCHE -->
+  <path d="M240 195 Q218 172 188 155 Q158 138 128 138 Q98 138 78 158 Q58 178 60 210 Q62 242 84 262 Q106 282 136 282 Q164 282 188 264 Q210 248 226 225 Q234 212 240 200"/>
+  <!-- Nervures aile sup gauche -->
+  <path d="M240 198 Q215 185 190 178 Q165 172 140 175" stroke-width="1.2"/>
+  <path d="M238 202 Q212 198 185 200 Q162 202 142 212" stroke-width="1.2"/>
+  <path d="M235 208 Q210 214 185 222 Q164 230 148 245" stroke-width="1.2"/>
+  <path d="M230 215 Q208 228 190 244 Q174 258 166 272" stroke-width="1.2"/>
+  <!-- Motifs aile sup gauche -->
+  <ellipse cx="138" cy="185" rx="38" ry="28" transform="rotate(-10 138 185)"/>
+  <ellipse cx="138" cy="185" rx="24" ry="17" transform="rotate(-10 138 185)"/>
+  <ellipse cx="138" cy="185" rx="12" ry="8" transform="rotate(-10 138 185)"/>
+  <!-- Cercles décoratifs -->
+  <circle cx="90" cy="218" r="14"/>
+  <circle cx="90" cy="218" r="8"/>
+  <circle cx="90" cy="218" r="3"/>
+  <circle cx="175" cy="152" r="10"/>
+  <circle cx="175" cy="152" r="5"/>
+  <!-- Bord dentelé -->
+  <path d="M60 210 Q68 196 78 200 Q82 188 90 192 Q96 180 105 185 Q112 173 120 178 Q128 167 136 172" stroke-width="1.2"/>
+
+  <!-- AILE SUPÉRIEURE DROITE -->
+  <path d="M260 195 Q282 172 312 155 Q342 138 372 138 Q402 138 422 158 Q442 178 440 210 Q438 242 416 262 Q394 282 364 282 Q336 282 312 264 Q290 248 274 225 Q266 212 260 200"/>
+  <!-- Nervures aile sup droite -->
+  <path d="M260 198 Q285 185 310 178 Q335 172 360 175" stroke-width="1.2"/>
+  <path d="M262 202 Q288 198 315 200 Q338 202 358 212" stroke-width="1.2"/>
+  <path d="M265 208 Q290 214 315 222 Q336 230 352 245" stroke-width="1.2"/>
+  <path d="M270 215 Q292 228 310 244 Q326 258 334 272" stroke-width="1.2"/>
+  <!-- Motifs aile sup droite -->
+  <ellipse cx="362" cy="185" rx="38" ry="28" transform="rotate(10 362 185)"/>
+  <ellipse cx="362" cy="185" rx="24" ry="17" transform="rotate(10 362 185)"/>
+  <ellipse cx="362" cy="185" rx="12" ry="8" transform="rotate(10 362 185)"/>
+  <!-- Cercles décoratifs -->
+  <circle cx="410" cy="218" r="14"/>
+  <circle cx="410" cy="218" r="8"/>
+  <circle cx="410" cy="218" r="3"/>
+  <circle cx="325" cy="152" r="10"/>
+  <circle cx="325" cy="152" r="5"/>
+  <!-- Bord dentelé -->
+  <path d="M440 210 Q432 196 422 200 Q418 188 410 192 Q404 180 395 185 Q388 173 380 178 Q372 167 364 172" stroke-width="1.2"/>
+
+  <!-- AILE INFÉRIEURE GAUCHE -->
+  <path d="M238 212 Q215 228 196 252 Q178 275 172 302 Q167 325 175 344 Q184 360 200 362 Q218 364 232 348 Q246 332 250 308 Q254 284 250 258 Q248 236 244 218"/>
+  <!-- Motifs aile inf gauche -->
+  <ellipse cx="198" cy="310" rx="26" ry="34"/>
+  <ellipse cx="198" cy="310" rx="16" ry="22"/>
+  <ellipse cx="198" cy="310" rx="8" ry="11"/>
+  <!-- Nervures -->
+  <path d="M238 215 Q220 240 208 268 Q198 292 197 318" stroke-width="1.2"/>
+  <path d="M234 220 Q225 250 222 278 Q219 302 222 324" stroke-width="1.2"/>
+  <!-- Points bord -->
+  <circle cx="174" cy="270" r="5"/>
+  <circle cx="168" cy="295" r="5"/>
+  <circle cx="168" cy="320" r="5"/>
+  <circle cx="174" cy="344" r="5"/>
+
+  <!-- AILE INFÉRIEURE DROITE -->
+  <path d="M262 212 Q285 228 304 252 Q322 275 328 302 Q333 325 325 344 Q316 360 300 362 Q282 364 268 348 Q254 332 250 308 Q246 284 250 258 Q252 236 256 218"/>
+  <!-- Motifs aile inf droite -->
+  <ellipse cx="302" cy="310" rx="26" ry="34"/>
+  <ellipse cx="302" cy="310" rx="16" ry="22"/>
+  <ellipse cx="302" cy="310" rx="8" ry="11"/>
+  <!-- Nervures -->
+  <path d="M262 215 Q280 240 292 268 Q302 292 303 318" stroke-width="1.2"/>
+  <path d="M266 220 Q275 250 278 278 Q281 302 278 324" stroke-width="1.2"/>
+  <!-- Points bord -->
+  <circle cx="326" cy="270" r="5"/>
+  <circle cx="332" cy="295" r="5"/>
+  <circle cx="332" cy="320" r="5"/>
+  <circle cx="326" cy="344" r="5"/>
+
+  <!-- CORPS -->
+  <path d="M244 155 Q238 170 236 190 Q234 215 236 240 Q238 270 240 295 Q242 318 244 338 Q246 354 250 362 Q254 354 256 338 Q258 318 260 295 Q262 270 264 240 Q266 215 264 190 Q262 170 256 155 Q253 148 250 146 Q247 148 244 155Z"/>
+  <!-- Segments corps -->
+  <path d="M240 185 Q250 182 260 185" stroke-width="1.2"/>
+  <path d="M238 210 Q250 207 262 210" stroke-width="1.2"/>
+  <path d="M238 235 Q250 232 262 235" stroke-width="1.2"/>
+  <path d="M238 260 Q250 257 262 260" stroke-width="1.2"/>
+  <path d="M239 285 Q250 282 261 285" stroke-width="1.2"/>
+  <path d="M240 308 Q250 305 260 308" stroke-width="1.2"/>
+  <path d="M242 328 Q250 325 258 328" stroke-width="1.2"/>
+
+  <!-- TÊTE -->
+  <circle cx="250" cy="136" r="22"/>
+  <!-- Yeux -->
+  <circle cx="241" cy="130" r="8"/>
+  <circle cx="241" cy="130" r="5" fill="#1a1a1a"/>
+  <circle cx="239" cy="128" r="2" fill="white"/>
+  <circle cx="259" cy="130" r="8"/>
+  <circle cx="259" cy="130" r="5" fill="#1a1a1a"/>
+  <circle cx="257" cy="128" r="2" fill="white"/>
+  <!-- Bouche -->
+  <path d="M245 142 Q250 146 255 142" stroke-width="1.5"/>
+
+  <!-- ANTENNES -->
+  <path d="M244 115 Q234 96 222 84 Q214 76 210 68"/>
+  <path d="M256 115 Q266 96 278 84 Q286 76 290 68"/>
+  <!-- Boules antennes -->
+  <circle cx="210" cy="65" r="8"/>
+  <circle cx="210" cy="65" r="4" fill="#1a1a1a"/>
+  <circle cx="290" cy="65" r="8"/>
+  <circle cx="290" cy="65" r="4" fill="#1a1a1a"/>
+
+  <!-- PETITES FLEURS AUTOUR -->
+  <g transform="translate(55,340)">
+    <circle cx="0" cy="0" r="10"/><circle cx="14" cy="0" r="8"/><circle cx="-14" cy="0" r="8"/>
+    <circle cx="0" cy="14" r="8"/><circle cx="0" cy="-14" r="8"/>
+    <circle cx="10" cy="10" r="7"/><circle cx="-10" cy="10" r="7"/>
+    <circle cx="10" cy="-10" r="7"/><circle cx="-10" cy="-10" r="7"/>
+    <circle cx="0" cy="0" r="6"/>
+  </g>
+  <g transform="translate(445,340)">
+    <circle cx="0" cy="0" r="10"/><circle cx="14" cy="0" r="8"/><circle cx="-14" cy="0" r="8"/>
+    <circle cx="0" cy="14" r="8"/><circle cx="0" cy="-14" r="8"/>
+    <circle cx="10" cy="10" r="7"/><circle cx="-10" cy="10" r="7"/>
+    <circle cx="10" cy="-10" r="7"/><circle cx="-10" cy="-10" r="7"/>
+    <circle cx="0" cy="0" r="6"/>
+  </g>
+
+</svg>

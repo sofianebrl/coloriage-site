@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>ColorDream - Éditeur</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="editor-page">
+
+  <!-- HEADER ÉDITEUR -->
+  <div class="editor-header">
+    <button class="back-btn" onclick="window.location.href='index.html'">
+      <i class="fas fa-arrow-left"></i> Retour
+    </button>
+    <span class="editor-title" id="editorTitle">Coloriage</span>
+    <div class="editor-actions">
+      <button class="btn-editor btn-undo" id="undoBtn" title="Annuler">
+        <i class="fas fa-undo"></i>
+      </button>
+      <button class="btn-editor btn-clear" id="clearBtn">
+        <i class="fas fa-trash"></i> Effacer
+      </button>
+      <button class="btn-editor btn-save" id="saveBtn">
+        <i class="fas fa-download"></i> Sauvegarder
+      </button>
+    </div>
+  </div>
+
+  <!-- TOOLBAR OUTILS -->
+  <div class="editor-toolbar">
+
+    <!-- Outils -->
+    <div class="tool-group">
+      <label>Outil</label>
+      <button class="tool-btn active" id="toolPen" title="Stylo">✏️</button>
+      <button class="tool-btn" id="toolBrush" title="Pinceau">🖌️</button>
+      <button class="tool-btn" id="toolFill" title="Remplissage">🪣</button>
+      <button class="tool-btn" id="toolEraser" title="Gomme">🧹</button>
+    </div>
+
+    <!-- Couleurs -->
+    <div class="tool-group">
+      <label>Couleur</label>
+      <div class="color-palette" id="colorPalette">
+        <div class="color-dot active" style="background:#000000" data-color="#000000"></div>
+        <div class="color-dot" style="background:#ff6eb4" data-color="#ff6eb4"></div>
+        <div class="color-dot" style="background:#ff4444" data-color="#ff4444"></div>
+        <div class="color-dot" style="background:#ff9900" data-color="#ff9900"></div>
+        <div class="color-dot" style="background:#ffd200" data-color="#ffd200"></div>
+        <div class="color-dot" style="background:#56ab2f" data-color="#56ab2f"></div>
+        <div class="color-dot" style="background:#4facfe" data-color="#4facfe"></div>
+        <div class="color-dot" style="background:#764ba2" data-color="#764ba2"></div>
+        <div class="color-dot" style="background:#ffffff" data-color="#ffffff" style="border:2px solid #ccc"></div>
+        <div class="color-dot" style="background:#8B4513" data-color="#8B4513"></div>
+        <div class="color-dot" style="background:#ff69b4" data-color="#ff69b4"></div>
+        <div class="color-dot" style="background:#00ced1" data-color="#00ced1"></div>
+      </div>
+      <div class="color-input-wrap" title="Couleur personnalisée">
+        <input type="color" id="customColor" value="#000000" />
+      </div>
+    </div>
+
+    <!-- Taille -->
+    <div class="tool-group">
+      <label>Taille <span id="sizeVal">8</span>px</label>
+      <input type="range" class="size-slider" id="sizeSlider" min="1" max="60" value="8" />
+    </div>
+
+    <!-- Opacité -->
+    <div class="tool-group">
+      <label>Opacité <span id="opacityVal">100</span>%</label>
+      <input type="range" class="opacity-slider" id="opacitySlider" min="10" max="100" value="100" />
+    </div>
+
+  </div>
+
+  <!-- CANVAS -->
+  <div class="editor-canvas-wrap">
+    <canvas id="drawingCanvas"></canvas>
+
+    <!-- SVG de coloriage calque en dessous -->
+    <div id="svgLayer" style="position:absolute;pointer-events:none;display:none;">
+      <svg id="coloringSvg" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+
+    <!-- Zoom controls -->
+    <div class="zoom-controls">
+      <button class="zoom-btn" id="zoomIn" title="Zoom +">+</button>
+      <button class="zoom-btn" id="zoomOut" title="Zoom -">−</button>
+      <button class="zoom-btn" id="zoomReset" title="Réinitialiser">⊙</button>
+    </div>
+  </div>
+
+  <script src="svgdata.js"></script>
+  <script src="editor.js"></script>
+</body>
+</html>

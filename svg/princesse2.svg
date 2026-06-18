@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none" stroke="#222" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Couronne fleurie -->
+  <path d="M155 110 Q200 85 245 110"/>
+  <circle cx="200" cy="88" r="10"/>
+  <circle cx="170" cy="100" r="8"/>
+  <circle cx="230" cy="100" r="8"/>
+  <path d="M193 88 Q200 78 207 88 Q200 96 193 88"/>
+  <!-- Fleurs couronne -->
+  <circle cx="170" cy="100" r="5"/>
+  <circle cx="200" cy="88" r="5"/>
+  <circle cx="230" cy="100" r="5"/>
+  <!-- Tête -->
+  <ellipse cx="200" cy="168" rx="52" ry="56"/>
+  <!-- Cheveux bouclés -->
+  <path d="M148 140 Q120 120 130 90 Q145 100 148 125"/>
+  <path d="M252 140 Q280 120 270 90 Q255 100 252 125"/>
+  <path d="M148 160 Q110 180 115 220 Q130 210 140 190"/>
+  <path d="M252 160 Q290 180 285 220 Q270 210 260 190"/>
+  <!-- Boucles sur épaules -->
+  <path d="M148 200 Q120 230 130 270 Q145 255 148 230"/>
+  <path d="M252 200 Q280 230 270 270 Q255 255 252 230"/>
+  <!-- Yeux en amande -->
+  <path d="M172 158 Q181 150 191 158 Q181 166 172 158Z"/>
+  <path d="M209 158 Q218 150 228 158 Q218 166 209 158Z"/>
+  <circle cx="182" cy="158" r="4" fill="#222"/>
+  <circle cx="218" cy="158" r="4" fill="#222"/>
+  <circle cx="184" cy="155" r="1.5" fill="white"/>
+  <circle cx="220" cy="155" r="1.5" fill="white"/>
+  <!-- Cils -->
+  <path d="M172 154 L169 149 M176 152 L174 146 M180 151 L179 145"/>
+  <path d="M228 154 L231 149 M224 152 L226 146 M220 151 L221 145"/>
+  <!-- Nez -->
+  <path d="M196 172 Q200 178 204 172" stroke-width="1.5"/>
+  <!-- Bouche souriante -->
+  <path d="M185 187 Q200 200 215 187"/>
+  <path d="M188 187 Q200 194 212 187" stroke-width="1"/>
+  <!-- Joues -->
+  <ellipse cx="163" cy="178" rx="11" ry="7" opacity="0.25"/>
+  <ellipse cx="237" cy="178" rx="11" ry="7" opacity="0.25"/>
+  <!-- Cou -->
+  <rect x="190" y="220" width="20" height="28" rx="5"/>
+  <!-- Robe à froufrous -->
+  <path d="M155 248 Q100 290 90 420 L310 420 Q300 290 245 248 Z"/>
+  <!-- Fronces robe -->
+  <path d="M90 340 Q110 330 130 340 Q150 330 170 340 Q190 330 210 340 Q230 330 250 340 Q270 330 290 340 Q310 330 310 340"/>
+  <path d="M90 370 Q110 360 130 370 Q150 360 170 370 Q190 360 210 370 Q230 360 250 370 Q270 360 290 370 Q310 360 310 370"/>
+  <!-- Ceinture -->
+  <rect x="160" y="260" width="80" height="18" rx="9"/>
+  <circle cx="200" cy="269" r="8"/>
+  <!-- Manches bouffantes -->
+  <ellipse cx="143" cy="258" rx="22" ry="16"/>
+  <ellipse cx="257" cy="258" rx="22" ry="16"/>
+  <!-- Bras -->
+  <path d="M125 268 Q110 300 120 340"/>
+  <path d="M275 268 Q290 300 280 340"/>
+  <!-- Mains -->
+  <ellipse cx="120" cy="344" rx="14" ry="10"/>
+  <ellipse cx="280" cy="344" rx="14" ry="10"/>
+</svg>

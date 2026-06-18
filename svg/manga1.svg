@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- CHEVEUX LONGS DERRIÈRE -->
+  <path d="M148 148 Q118 172 110 220 Q104 260 108 310 Q112 355 122 395 Q130 425 138 450" stroke-width="2.5"/>
+  <path d="M252 148 Q282 172 290 220 Q296 260 292 310 Q288 355 278 395 Q270 425 262 450" stroke-width="2.5"/>
+  <path d="M144 152 Q115 180 110 240 Q106 280 112 330 Q118 368 130 405" stroke-width="1.8"/>
+  <path d="M256 152 Q285 180 290 240 Q294 280 288 330 Q282 368 270 405" stroke-width="1.8"/>
+  <path d="M142 155 Q116 186 114 245 Q112 285 118 330" stroke-width="1.4"/>
+  <path d="M258 155 Q284 186 286 245 Q288 285 282 330" stroke-width="1.4"/>
+
+  <!-- TÊTE -->
+  <path d="M150 185 Q146 155 158 135 Q172 115 200 110 Q228 115 242 135 Q254 155 250 185 Q254 210 248 232 Q238 258 200 264 Q162 258 152 232 Q146 210 150 185Z"/>
+
+  <!-- CHEVEUX AVANT (mèches détaillées) -->
+  <!-- Mèche gauche longue -->
+  <path d="M152 160 Q138 148 136 132 Q136 118 146 114 Q156 112 162 125 Q167 138 162 152"/>
+  <!-- Mèche droite longue -->
+  <path d="M248 160 Q262 148 264 132 Q264 118 254 114 Q244 112 238 125 Q233 138 238 152"/>
+  <!-- Frange en pointe -->
+  <path d="M156 138 Q162 118 172 120 Q180 122 180 132"/>
+  <path d="M172 118 Q180 105 192 108 Q200 110 200 122"/>
+  <path d="M244 138 Q238 118 228 120 Q220 122 220 132"/>
+  <path d="M228 118 Q220 105 208 108 Q200 110 200 122"/>
+  <!-- Frange centrale -->
+  <path d="M180 130 Q190 118 200 122 Q210 118 220 130"/>
+  <!-- Épi sur le dessus -->
+  <path d="M196 110 Q200 98 204 110"/>
+  <path d="M188 112 Q190 102 196 108"/>
+  <path d="M212 112 Q210 102 204 108"/>
+
+  <!-- OREILLES -->
+  <path d="M150 188 Q140 190 137 200 Q136 210 142 215 Q148 218 152 210"/>
+  <path d="M250 188 Q260 190 263 200 Q264 210 258 215 Q252 218 248 210"/>
+  <path d="M142 196 Q140 204 143 210" stroke-width="1.2"/>
+  <path d="M258 196 Q260 204 257 210" stroke-width="1.2"/>
+
+  <!-- YEUX MANGA TRÈS GRANDS -->
+  <!-- Oeil gauche -->
+  <path d="M158 182 Q168 168 182 170 Q198 168 204 182 Q200 200 182 204 Q164 200 158 182Z"/>
+  <!-- Iris gauche -->
+  <ellipse cx="181" cy="186" rx="14" ry="16" fill="#1a1a1a"/>
+  <!-- Reflets oeil gauche -->
+  <circle cx="175" cy="179" r="6" fill="white"/>
+  <circle cx="186" cy="193" r="3" fill="white"/>
+  <ellipse cx="188" cy="181" rx="2" ry="3" fill="white"/>
+  <!-- Cils supérieurs gauche (épais) -->
+  <path d="M158 182 L153 174 M163 177 L160 169 M169 174 L167 166 M176 172 L175 164 M183 171 L183 163 M190 173 L191 165 M197 176 L199 168 M204 182 L207 175"/>
+  <!-- Cils inférieurs gauche -->
+  <path d="M162 198 L159 204 M170 201 L168 207 M178 203 L177 209 M186 202 L186 208 M194 200 L195 206 M200 197 L202 203"/>
+  <!-- Double paupière -->
+  <path d="M160 183 Q182 175 202 183" stroke-width="1"/>
+
+  <!-- Oeil droit -->
+  <path d="M196 182 Q202 168 218 170 Q232 168 242 182 Q238 200 218 204 Q200 200 196 182Z"/>
+  <!-- Iris droit -->
+  <ellipse cx="219" cy="186" rx="14" ry="16" fill="#1a1a1a"/>
+  <!-- Reflets oeil droit -->
+  <circle cx="213" cy="179" r="6" fill="white"/>
+  <circle cx="224" cy="193" r="3" fill="white"/>
+  <ellipse cx="226" cy="181" rx="2" ry="3" fill="white"/>
+  <!-- Cils supérieurs droit (épais) -->
+  <path d="M196 182 L193 175 M201 177 L199 169 M207 174 L205 166 M214 172 L213 164 M221 171 L221 163 M228 173 L229 165 M235 176 L237 168 M242 182 L245 175"/>
+  <!-- Cils inférieurs droit -->
+  <path d="M200 198 L198 204 M208 201 L206 207 M216 203 L215 209 M224 202 L224 208 M232 200 L233 206 M238 197 L240 203"/>
+  <!-- Double paupière -->
+  <path d="M198 183 Q220 175 240 183" stroke-width="1"/>
+
+  <!-- SOURCILS (arqués et expressifs) -->
+  <path d="M155 168 Q170 158 198 163" stroke-width="2.8"/>
+  <path d="M202 163 Q230 158 245 168" stroke-width="2.8"/>
+
+  <!-- NEZ DÉLICAT -->
+  <path d="M196 218 Q200 224 204 222" stroke-width="1.5"/>
+  <path d="M196 222 Q200 226 204 222" stroke-width="1.2"/>
+
+  <!-- BOUCHE KAWAII -->
+  <path d="M184 238 Q192 232 200 234 Q208 232 216 238"/>
+  <path d="M184 238 Q192 246 200 248 Q208 246 216 238"/>
+  <path d="M188 246 Q200 250 212 246" stroke-width="1"/>
+  <!-- Petite dent -->
+  <path d="M197 242 L197 248 L203 248 L203 242" stroke-width="1"/>
+  <!-- Fossettes -->
+  <path d="M180 240 Q178 244 180 247" stroke-width="1.2"/>
+  <path d="M220 240 Q222 244 220 247" stroke-width="1.2"/>
+
+  <!-- JOUES RONDES KAWAII -->
+  <path d="M153 228 Q160 222 168 228 Q165 236 158 234 Q152 232 153 228Z" stroke-width="1" opacity="0.4"/>
+  <path d="M232 228 Q239 222 247 228 Q246 234 239 236 Q232 234 232 228Z" stroke-width="1" opacity="0.4"/>
+
+  <!-- COU -->
+  <path d="M186 262 Q183 268 183 278 L183 288"/>
+  <path d="M214 262 Q217 268 217 278 L217 288"/>
+  <!-- Collier écolière -->
+  <path d="M183 284 Q200 290 217 284" stroke-width="1.5"/>
+
+  <!-- UNIFORME ÉCOLIÈRE ÉLABORÉ -->
+  <!-- Veste/blazer -->
+  <path d="M155 295 Q140 305 134 320 L128 440 L178 440 L186 360 Z"/>
+  <path d="M245 295 Q260 305 266 320 L272 440 L222 440 L214 360 Z"/>
+  <!-- Revers veste gauche -->
+  <path d="M155 295 Q162 305 170 295 Q176 288 183 288"/>
+  <path d="M168 295 Q162 312 158 328 Q158 340 163 348"/>
+  <!-- Revers veste droite -->
+  <path d="M245 295 Q238 305 230 295 Q224 288 217 288"/>
+  <path d="M232 295 Q238 312 242 328 Q242 340 237 348"/>
+  <!-- Chemise intérieure et cravate -->
+  <path d="M170 295 Q184 305 200 300 Q216 305 230 295"/>
+  <path d="M192 298 L200 325 L208 298"/>
+  <path d="M196 310 L200 322 L204 310 L200 314Z" stroke-width="1.2"/>
+  <!-- Jupe plissée -->
+  <path d="M128 380 Q165 368 200 370 Q235 368 272 380 L272 440 L128 440Z"/>
+  <!-- Plis jupe -->
+  <line x1="142" y1="380" x2="138" y2="440" stroke-width="1.2"/>
+  <line x1="157" y1="373" x2="154" y2="440" stroke-width="1.2"/>
+  <line x1="172" y1="370" x2="170" y2="440" stroke-width="1.2"/>
+  <line x1="187" y1="369" x2="186" y2="440" stroke-width="1.2"/>
+  <line x1="200" y1="369" x2="200" y2="440" stroke-width="1.2"/>
+  <line x1="213" y1="369" x2="214" y2="440" stroke-width="1.2"/>
+  <line x1="228" y1="370" x2="230" y2="440" stroke-width="1.2"/>
+  <line x1="243" y1="373" x2="246" y2="440" stroke-width="1.2"/>
+  <line x1="258" y1="380" x2="262" y2="440" stroke-width="1.2"/>
+  <!-- Ourlet jupe -->
+  <path d="M128 435 Q165 430 200 431 Q235 430 272 435"/>
+  <!-- Boutons veste -->
+  <circle cx="200" cy="342" r="4"/>
+  <circle cx="200" cy="356" r="4"/>
+  <!-- Poches veste -->
+  <path d="M140 348 Q148 344 156 348 Q156 360 148 362 Q140 360 140 348Z" stroke-width="1.2"/>
+  <path d="M244 348 Q252 344 260 348 Q260 360 252 362 Q244 360 244 348Z" stroke-width="1.2"/>
+
+  <!-- BRAS -->
+  <!-- Bras gauche -->
+  <path d="M134 322 Q120 348 118 380 Q118 395 124 405 Q130 413 138 410 Q146 406 148 392 Q150 376 155 352"/>
+  <!-- Manchette gauche -->
+  <path d="M118 392 Q125 406 136 410 Q144 412 150 402" stroke-width="1.5"/>
+  <!-- Sac à main -->
+  <path d="M112 395 Q100 400 96 418 Q94 432 102 440 Q112 446 126 440 Q136 434 136 420 Q136 406 126 400 Q120 396 112 395Z"/>
+  <path d="M108 396 Q104 388 112 384 Q120 382 124 390" stroke-width="1.5"/>
+  <path d="M102 418 Q116 414 130 418" stroke-width="1.2"/>
+  <circle cx="116" cy="420" r="4"/>
+
+  <!-- Bras droit -->
+  <path d="M266 322 Q280 348 282 380 Q282 395 276 405 Q270 413 262 410 Q254 406 252 392 Q250 376 245 352"/>
+  <!-- Manchette droite -->
+  <path d="M282 392 Q275 406 264 410 Q256 412 250 402" stroke-width="1.5"/>
+  <!-- Main droite -->
+  <path d="M280 404 Q286 412 284 420 Q282 428 276 428 Q271 428 270 420"/>
+  <path d="M276 426 Q274 434 270 440 Q266 444 264 440"/>
+  <path d="M272 428 Q270 436 268 442"/>
+  <path d="M268 426 Q264 434 262 440"/>
+
+  <!-- CHAUSSETTES ET CHAUSSURES -->
+  <!-- Chaussettes hautes -->
+  <path d="M128 440 L128 475 Q138 480 150 478 L155 440"/>
+  <path d="M245 440 L248 478 Q260 480 272 475 L272 440"/>
+  <!-- Rayures chaussettes -->
+  <path d="M130 452 Q141 450 153 452" stroke-width="1.2"/>
+  <path d="M130 460 Q141 458 153 460" stroke-width="1.2"/>
+  <path d="M248 452 Q259 450 271 452" stroke-width="1.2"/>
+  <path d="M248 460 Q259 458 271 460" stroke-width="1.2"/>
+  <!-- Chaussures -->
+  <path d="M124 474 Q118 480 115 490 Q113 498 120 502 Q132 506 148 500 Q158 494 158 484 Q158 476 150 473"/>
+  <path d="M250 473 Q242 476 242 484 Q242 494 252 500 Q268 506 280 502 Q287 498 285 490 Q282 480 276 474"/>
+  <!-- Détail chaussures -->
+  <path d="M120 494 Q136 488 152 494" stroke-width="1.2"/>
+  <circle cx="134" cy="490" r="4"/>
+  <path d="M248 492 Q264 486 280 492" stroke-width="1.2"/>
+  <circle cx="264" cy="488" r="4"/>
+
+</svg>

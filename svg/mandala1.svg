@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+
+  <!-- CERCLES DE BASE -->
+  <circle cx="250" cy="250" r="15"/>
+  <circle cx="250" cy="250" r="30"/>
+  <circle cx="250" cy="250" r="50"/>
+  <circle cx="250" cy="250" r="75"/>
+  <circle cx="250" cy="250" r="100"/>
+  <circle cx="250" cy="250" r="128"/>
+  <circle cx="250" cy="250" r="155"/>
+  <circle cx="250" cy="250" r="182"/>
+  <circle cx="250" cy="250" r="208"/>
+  <circle cx="250" cy="250" r="230"/>
+
+  <!-- PÉTALES INTÉRIEURS (8 pétales) -->
+  <path d="M250 220 Q262 235 250 250 Q238 235 250 220Z"/>
+  <path d="M250 220 Q262 235 250 250 Q238 235 250 220Z" transform="rotate(45 250 250)"/>
+  <path d="M250 220 Q262 235 250 250 Q238 235 250 220Z" transform="rotate(90 250 250)"/>
+  <path d="M250 220 Q262 235 250 250 Q238 235 250 220Z" transform="rotate(135 250 250)"/>
+  <path d="M250 220 Q262 235 250 250 Q238 235 250 220Z" transform="rotate(180 250 250)"/>
+  <path d="M250 220 Q262 235 250 250 Q238 235 250 220Z" transform="rotate(225 250 250)"/>
+  <path d="M250 220 Q262 235 250 250 Q238 235 250 220Z" transform="rotate(270 250 250)"/>
+  <path d="M250 220 Q262 235 250 250 Q238 235 250 220Z" transform="rotate(315 250 250)"/>
+
+  <!-- ANNEAU 2 - FLAMMES (16 éléments) -->
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z"/>
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z" transform="rotate(22.5 250 250)"/>
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z" transform="rotate(45 250 250)"/>
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z" transform="rotate(67.5 250 250)"/>
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z" transform="rotate(90 250 250)"/>
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z" transform="rotate(112.5 250 250)"/>
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z" transform="rotate(135 250 250)"/>
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z" transform="rotate(157.5 250 250)"/>
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z" transform="rotate(180 250 250)"/>
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z" transform="rotate(202.5 250 250)"/>
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z" transform="rotate(225 250 250)"/>
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z" transform="rotate(247.5 250 250)"/>
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z" transform="rotate(270 250 250)"/>
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z" transform="rotate(292.5 250 250)"/>
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z" transform="rotate(315 250 250)"/>
+  <path d="M250 200 Q260 218 250 230 Q240 218 250 200Z" transform="rotate(337.5 250 250)"/>
+
+  <!-- ANNEAU 3 - GROS PÉTALES (8) -->
+  <path d="M250 175 Q272 205 250 225 Q228 205 250 175Z"/>
+  <path d="M250 175 Q272 205 250 225 Q228 205 250 175Z" transform="rotate(45 250 250)"/>
+  <path d="M250 175 Q272 205 250 225 Q228 205 250 175Z" transform="rotate(90 250 250)"/>
+  <path d="M250 175 Q272 205 250 225 Q228 205 250 175Z" transform="rotate(135 250 250)"/>
+  <path d="M250 175 Q272 205 250 225 Q228 205 250 175Z" transform="rotate(180 250 250)"/>
+  <path d="M250 175 Q272 205 250 225 Q228 205 250 175Z" transform="rotate(225 250 250)"/>
+  <path d="M250 175 Q272 205 250 225 Q228 205 250 175Z" transform="rotate(270 250 250)"/>
+  <path d="M250 175 Q272 205 250 225 Q228 205 250 175Z" transform="rotate(315 250 250)"/>
+
+  <!-- ANNEAU 4 - DIAMANTS -->
+  <path d="M250 150 L258 175 L250 200 L242 175Z"/>
+  <path d="M250 150 L258 175 L250 200 L242 175Z" transform="rotate(45 250 250)"/>
+  <path d="M250 150 L258 175 L250 200 L242 175Z" transform="rotate(90 250 250)"/>
+  <path d="M250 150 L258 175 L250 200 L242 175Z" transform="rotate(135 250 250)"/>
+  <path d="M250 150 L258 175 L250 200 L242 175Z" transform="rotate(180 250 250)"/>
+  <path d="M250 150 L258 175 L250 200 L242 175Z" transform="rotate(225 250 250)"/>
+  <path d="M250 150 L258 175 L250 200 L242 175Z" transform="rotate(270 250 250)"/>
+  <path d="M250 150 L258 175 L250 200 L242 175Z" transform="rotate(315 250 250)"/>
+
+  <!-- ANNEAU 5 - FEUILLES DOUBLES (16) -->
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z"/>
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z" transform="rotate(22.5 250 250)"/>
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z" transform="rotate(45 250 250)"/>
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z" transform="rotate(67.5 250 250)"/>
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z" transform="rotate(90 250 250)"/>
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z" transform="rotate(112.5 250 250)"/>
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z" transform="rotate(135 250 250)"/>
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z" transform="rotate(157.5 250 250)"/>
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z" transform="rotate(180 250 250)"/>
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z" transform="rotate(202.5 250 250)"/>
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z" transform="rotate(225 250 250)"/>
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z" transform="rotate(247.5 250 250)"/>
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z" transform="rotate(270 250 250)"/>
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z" transform="rotate(292.5 250 250)"/>
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z" transform="rotate(315 250 250)"/>
+  <path d="M250 122 Q260 138 250 152 Q240 138 250 122Z" transform="rotate(337.5 250 250)"/>
+
+  <!-- ANNEAU 6 - GRANDES FEUILLES (8) -->
+  <path d="M250 95 Q275 122 250 148 Q225 122 250 95Z"/>
+  <path d="M250 95 Q275 122 250 148 Q225 122 250 95Z" transform="rotate(45 250 250)"/>
+  <path d="M250 95 Q275 122 250 148 Q225 122 250 95Z" transform="rotate(90 250 250)"/>
+  <path d="M250 95 Q275 122 250 148 Q225 122 250 95Z" transform="rotate(135 250 250)"/>
+  <path d="M250 95 Q275 122 250 148 Q225 122 250 95Z" transform="rotate(180 250 250)"/>
+  <path d="M250 95 Q275 122 250 148 Q225 122 250 95Z" transform="rotate(225 250 250)"/>
+  <path d="M250 95 Q275 122 250 148 Q225 122 250 95Z" transform="rotate(270 250 250)"/>
+  <path d="M250 95 Q275 122 250 148 Q225 122 250 95Z" transform="rotate(315 250 250)"/>
+
+  <!-- ANNEAU 7 - ARCS DÉCORATIFS (16) -->
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z"/>
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z" transform="rotate(22.5 250 250)"/>
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z" transform="rotate(45 250 250)"/>
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z" transform="rotate(67.5 250 250)"/>
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z" transform="rotate(90 250 250)"/>
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z" transform="rotate(112.5 250 250)"/>
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z" transform="rotate(135 250 250)"/>
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z" transform="rotate(157.5 250 250)"/>
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z" transform="rotate(180 250 250)"/>
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z" transform="rotate(202.5 250 250)"/>
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z" transform="rotate(225 250 250)"/>
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z" transform="rotate(247.5 250 250)"/>
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z" transform="rotate(270 250 250)"/>
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z" transform="rotate(292.5 250 250)"/>
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z" transform="rotate(315 250 250)"/>
+  <path d="M250 68 Q256 75 250 82 Q244 75 250 68Z" transform="rotate(337.5 250 250)"/>
+
+  <!-- LIGNES RAYONNANTES -->
+  <line x1="250" y1="40" x2="250" y2="20" stroke-width="2"/>
+  <line x1="250" y1="40" x2="250" y2="20" transform="rotate(45 250 250)" stroke-width="2"/>
+  <line x1="250" y1="40" x2="250" y2="20" transform="rotate(90 250 250)" stroke-width="2"/>
+  <line x1="250" y1="40" x2="250" y2="20" transform="rotate(135 250 250)" stroke-width="2"/>
+  <line x1="250" y1="40" x2="250" y2="20" transform="rotate(180 250 250)" stroke-width="2"/>
+  <line x1="250" y1="40" x2="250" y2="20" transform="rotate(225 250 250)" stroke-width="2"/>
+  <line x1="250" y1="40" x2="250" y2="20" transform="rotate(270 250 250)" stroke-width="2"/>
+  <line x1="250" y1="40" x2="250" y2="20" transform="rotate(315 250 250)" stroke-width="2"/>
+
+  <!-- POINTES EXTÉRIEURES (16) -->
+  <path d="M250 22 L255 35 L250 40 L245 35Z"/>
+  <path d="M250 22 L255 35 L250 40 L245 35Z" transform="rotate(22.5 250 250)"/>
+  <path d="M250 22 L255 35 L250 40 L245 35Z" transform="rotate(45 250 250)"/>
+  <path d="M250 22 L255 35 L250 40 L245 35Z" transform="rotate(67.5 250 250)"/>
+  <path d="M250 22 L255 35 L250 40 L245 35Z" transform="rotate(90 250 250)"/>
+  <path d="M250 22 L255 35 L250 40 L245 35Z" transform="rotate(112.5 250 250)"/>
+  <path d="M250 22 L255 35 L250 40 L245 35Z" transform="rotate(135 250 250)"/>
+  <path d="M250 22 L255 35 L250 40 L245 35Z" transform="rotate(157.5 250 250)"/>
+  <path d="M250 22 L255 35 L250 40 L245 35Z" transform="rotate(180 250 250)"/>
+  <path d="M250 22 L255 35 L250 40 L245 35Z" transform="rotate(202.5 250 250)"/>
+  <path d="M250 22 L255 35 L250 40 L245 35Z" transform="rotate(225 250 250)"/>
+  <path d="M250 22 L255 35 L250 40 L245 35Z" transform="rotate(247.5 250 250)"/>
+  <path d="M250 22 L255 35 L250 40 L245 35Z" transform="rotate(270 250 250)"/>
+  <path d="M250 22 L255 35 L250 40 L245 35Z" transform="rotate(292.5 250 250)"/>
+  <path d="M250 22 L255 35 L250 40 L245 35Z" transform="rotate(315 250 250)"/>
+  <path d="M250 22 L255 35 L250 40 L245 35Z" transform="rotate(337.5 250 250)"/>
+
+</svg>
