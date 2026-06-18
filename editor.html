@@ -79,12 +79,10 @@
 
   <!-- CANVAS -->
   <div class="editor-canvas-wrap">
-    <canvas id="drawingCanvas"></canvas>
-
-    <!-- SVG de coloriage calque en dessous -->
-    <div id="svgLayer" style="position:absolute;pointer-events:none;display:none;">
-      <svg id="coloringSvg" xmlns="http://www.w3.org/2000/svg"></svg>
-    </div>
+    <!-- Canvas de base : coloriage fixe (jamais effacé) -->
+    <canvas id="baseCanvas" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;border-radius:4px;"></canvas>
+    <!-- Canvas de dessin : couleurs par-dessus (effaçable) -->
+    <canvas id="drawingCanvas" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:4px;cursor:crosshair;"></canvas>
 
     <!-- Zoom controls -->
     <div class="zoom-controls">

@@ -553,12 +553,17 @@ body {
   background: #0d1117;
 }
 
+#baseCanvas {
+  border-radius: 4px;
+  background: white;
+  box-shadow: 0 0 60px rgba(0,0,0,0.5);
+}
+
 #drawingCanvas {
   touch-action: none;
   cursor: crosshair;
   border-radius: 4px;
-  background: white;
-  box-shadow: 0 0 60px rgba(0,0,0,0.5);
+  background: transparent;
 }
 
 .zoom-controls {
