@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>ColorDream ✨ - Coloriage & Dessin</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#764ba2" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="ColorDream" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Pacifico&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
@@ -131,6 +136,14 @@
     </div>
   </div>
 
+  <!-- MES CRÉATIONS -->
+  <section class="creations" id="creationsSection" style="display:none;">
+    <div class="container">
+      <h2 class="section-title">Mes créations</h2>
+      <div class="creations-grid" id="creationsGrid"></div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer class="footer">
     <p>Fait avec ❤️ pour toi 🎨</p>
@@ -138,5 +151,10 @@
 
   <script src="svgdata.js"></script>
   <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js');
+    }
+  </script>
 </body>
 </html>

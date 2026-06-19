@@ -24,6 +24,10 @@ const CATALOG = {
     { title: 'Licorne magique',      svg: 'licorne' },
     { title: 'Papillon',             svg: 'papillon' },
   ],
+  manga: [
+    { title: 'Stitch dodo',          img: 'images/stitch.jpg' },
+    { title: 'Nick & Judy',          img: 'images/zootopie.jpg' },
+  ],
   mandala: [
     { title: 'Mandala floral',       svg: 'mandala1' },
     { title: 'Mandala zen',          svg: 'mandala1' },
@@ -58,6 +62,11 @@ const modal        = document.getElementById('modal');
 const modalClose   = document.getElementById('modalClose');
 const modalTitle   = document.getElementById('modalTitle');
 const coloringGrid = document.getElementById('coloringGrid');
+
+// ── Favoris helpers ──────────────────────────────────────────
+function getFavs() { return JSON.parse(localStorage.getItem('cdFavs') || '[]'); }
+function setFavs(f) { localStorage.setItem('cdFavs', JSON.stringify(f)); }
+function favId(cat, title) { return cat + '|' + title; }
 
 // ── Ouvrir modal catégorie ───────────────────────────────────
 function openCategory(cat, titleText) {
@@ -96,6 +105,22 @@ function openCategory(cat, titleText) {
     label.textContent = item.title;
     thumb.appendChild(label);
 
+    // Bouton favori
+    const id = favId(cat, item.title);
+    const favBtn = document.createElement('button');
+    favBtn.className = 'fav-btn';
+    favBtn.textContent = getFavs().includes(id) ? '❤️' : '🤍';
+    favBtn.title = 'Ajouter aux favoris';
+    favBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      const favs = getFavs();
+      const idx = favs.indexOf(id);
+      if (idx === -1) { favs.push(id); favBtn.textContent = '❤️'; }
+      else { favs.splice(idx, 1); favBtn.textContent = '🤍'; }
+      setFavs(favs);
+    });
+    thumb.appendChild(favBtn);
+
     thumb.addEventListener('click', () => openEditor(item));
     coloringGrid.appendChild(thumb);
   });
@@ -103,6 +128,24 @@ function openCategory(cat, titleText) {
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
+
+// ── Historique Mes créations ─────────────────────────────────
+function loadHistory() {
+  const history = JSON.parse(localStorage.getItem('cdHistory') || '[]');
+  if (history.length === 0) return;
+  const section = document.getElementById('creationsSection');
+  const grid    = document.getElementById('creationsGrid');
+  if (!section || !grid) return;
+  section.style.display = 'block';
+  grid.innerHTML = '';
+  history.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'creation-thumb';
+    div.innerHTML = `<img src="${item.thumbnail}" alt="${item.title}" /><p>${item.title}</p><span>${item.date}</span>`;
+    grid.appendChild(div);
+  });
+}
+loadHistory();
 
 // ── Ouvrir éditeur ───────────────────────────────────────────
 function openEditor(item) {

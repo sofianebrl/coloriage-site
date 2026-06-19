@@ -17,8 +17,16 @@ let currentOpacity = 1;
 let currentTool    = 'pen';
 let isDrawing      = false;
 let zoom           = 1;
+let panX = 0, panY = 0;
+let isPanning = false, spaceDown = false;
+let panMouseStartX = 0, panMouseStartY = 0, panStartPanX = 0, panStartPanY = 0;
+let touchPanActive = false, touchPanStartX = 0, touchPanStartY = 0;
+let stabFactor = 0;
+let stabX = 0, stabY = 0;
 let undoStack      = [];
+let redoStack      = [];
 const MAX_UNDO     = 25;
+const recentColors = [];
 
 // ── Resize des deux canvas ────────────────────────────────────
 function resizeCanvas() {
@@ -89,21 +97,23 @@ function reloadBase() {
 function init() {
   const title = sessionStorage.getItem('currentTitle') || 'Dessin libre';
   document.getElementById('editorTitle').textContent = title;
+  document.getElementById('activeColorSwatch').style.background = currentColor;
+  document.getElementById('customColor').value = currentColor;
   resizeCanvas();
+  applyZoom();
   saveUndo();
 }
 
-// ── Undo (uniquement le canvas de dessin) ────────────────────
+// ── Undo / Redo ───────────────────────────────────────────────
 function saveUndo() {
   if (undoStack.length >= MAX_UNDO) undoStack.shift();
   undoStack.push(canvasDraw.toDataURL());
+  redoStack = [];
 }
 
-function undo() {
-  if (undoStack.length <= 1) return;
-  undoStack.pop();
+function restoreSnapshot(dataUrl) {
   const img = new Image();
-  img.src = undoStack[undoStack.length - 1];
+  img.src = dataUrl;
   img.onload = () => {
     const dpr = window.devicePixelRatio || 1;
     const w   = canvasDraw.width  / dpr;
@@ -111,6 +121,93 @@ function undo() {
     ctxDraw.clearRect(0, 0, w, h);
     ctxDraw.drawImage(img, 0, 0, w, h);
   };
+}
+
+function undo() {
+  if (undoStack.length <= 1) return;
+  redoStack.push(undoStack.pop());
+  restoreSnapshot(undoStack[undoStack.length - 1]);
+}
+
+function redo() {
+  if (redoStack.length === 0) return;
+  const snap = redoStack.pop();
+  undoStack.push(snap);
+  restoreSnapshot(snap);
+}
+
+// ── Couleurs récentes ─────────────────────────────────────────
+function addRecentColor(color) {
+  const idx = recentColors.indexOf(color);
+  if (idx !== -1) recentColors.splice(idx, 1);
+  recentColors.unshift(color);
+  if (recentColors.length > 6) recentColors.pop();
+  renderRecentColors();
+}
+
+function renderRecentColors() {
+  const bar = document.getElementById('recentColors');
+  if (!bar) return;
+  bar.innerHTML = '';
+  recentColors.forEach(c => {
+    const dot = document.createElement('div');
+    dot.className = 'color-dot recent-dot';
+    dot.style.background = c;
+    dot.dataset.color = c;
+    dot.title = c;
+    dot.addEventListener('click', () => pickColor(c));
+    bar.appendChild(dot);
+  });
+}
+
+function pickColor(color) {
+  currentColor = color;
+  document.getElementById('customColor').value = color;
+  document.getElementById('activeColorSwatch').style.background = color;
+  document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+  if (currentTool === 'eraser') setTool('pen');
+}
+
+// ── Curseur dynamique ─────────────────────────────────────────
+const cursorCanvas = document.createElement('canvas');
+cursorCanvas.style.cssText = 'position:fixed;top:0;left:0;pointer-events:none;z-index:9999;';
+document.body.appendChild(cursorCanvas);
+const cursorCtx = cursorCanvas.getContext('2d');
+
+function resizeCursorCanvas() {
+  cursorCanvas.width  = window.innerWidth;
+  cursorCanvas.height = window.innerHeight;
+}
+resizeCursorCanvas();
+window.addEventListener('resize', resizeCursorCanvas);
+
+let cursorVisible = false;
+let lastCursorX = 0, lastCursorY = 0;
+
+function drawCursor(x, y) {
+  cursorCtx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
+  if (!cursorVisible) return;
+  const r = (currentTool === 'eraser' ? currentSize * 4 : currentSize) / 2 * zoom;
+  cursorCtx.beginPath();
+  cursorCtx.arc(x, y, Math.max(r, 2), 0, Math.PI * 2);
+  cursorCtx.strokeStyle = currentTool === 'eraser' ? 'rgba(255,100,100,0.9)' : 'rgba(0,0,0,0.8)';
+  cursorCtx.lineWidth = 1.5;
+  cursorCtx.stroke();
+  cursorCtx.beginPath();
+  cursorCtx.arc(x, y, Math.max(r, 2), 0, Math.PI * 2);
+  cursorCtx.strokeStyle = 'rgba(255,255,255,0.6)';
+  cursorCtx.lineWidth = 0.7;
+  cursorCtx.stroke();
+}
+
+canvasDraw.addEventListener('pointerenter', () => {
+  cursorVisible = true;
+  canvasDraw.style.cursor = 'none';
+});
+
+// Redessiner le curseur quand taille/outil change
+function refreshCursor() {
+  if (cursorVisible) drawCursor(lastCursorX, lastCursorY);
 }
 
 // ── Position du pointeur ──────────────────────────────────────
@@ -170,9 +267,28 @@ function startDraw(e) {
     floodFill(pos.x, pos.y, currentColor);
     isDrawing = false;
     saveUndo();
+    addRecentColor(currentColor);
     return;
   }
 
+  if (currentTool === 'eyedrop') {
+    const dpr = window.devicePixelRatio || 1;
+    const sx = Math.round(pos.x * dpr);
+    const sy = Math.round(pos.y * dpr);
+    if (sx >= 0 && sy >= 0 && sx < canvasBase.width && sy < canvasBase.height) {
+      const bp = ctxBase.getImageData(sx, sy, 1, 1).data;
+      const dp = ctxDraw.getImageData(sx, sy, 1, 1).data;
+      const [r, g, b] = dp[3] > 10 ? [dp[0], dp[1], dp[2]] : [bp[0], bp[1], bp[2]];
+      const hex = '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
+      pickColor(hex);
+      showToast('🎨 Couleur capturée !');
+    }
+    isDrawing = false;
+    setTool('pen');
+    return;
+  }
+
+  stabX = pos.x; stabY = pos.y;
   applyStyle(pos.pressure);
   ctxDraw.beginPath();
   ctxDraw.moveTo(pos.x, pos.y);
@@ -184,11 +300,13 @@ function draw(e) {
   if (!isDrawing) return;
   e.preventDefault();
   const pos = getPos(e);
+  stabX = stabX + (pos.x - stabX) * (1 - stabFactor);
+  stabY = stabY + (pos.y - stabY) * (1 - stabFactor);
   applyStyle(pos.pressure);
-  ctxDraw.lineTo(pos.x, pos.y);
+  ctxDraw.lineTo(stabX, stabY);
   ctxDraw.stroke();
   ctxDraw.beginPath();
-  ctxDraw.moveTo(pos.x, pos.y);
+  ctxDraw.moveTo(stabX, stabY);
 }
 
 function stopDraw() {
@@ -197,16 +315,81 @@ function stopDraw() {
   ctxDraw.globalAlpha = 1;
   ctxDraw.globalCompositeOperation = 'source-over';
   saveUndo();
+  if (currentTool !== 'eraser') addRecentColor(currentColor);
 }
 
-// Pointer events (Apple Pencil natif)
-canvasDraw.addEventListener('pointerdown', startDraw);
-canvasDraw.addEventListener('pointermove', draw);
-canvasDraw.addEventListener('pointerup',   stopDraw);
-canvasDraw.addEventListener('pointerleave',stopDraw);
-canvasDraw.addEventListener('touchstart',  startDraw, { passive: false });
-canvasDraw.addEventListener('touchmove',   draw,      { passive: false });
-canvasDraw.addEventListener('touchend',    stopDraw,  { passive: false });
+// ── Événements unifiés (dessin + pan) ────────────────────────
+canvasDraw.addEventListener('pointerdown', e => {
+  if (spaceDown) {
+    isPanning = true;
+    panMouseStartX = e.clientX; panMouseStartY = e.clientY;
+    panStartPanX = panX; panStartPanY = panY;
+    canvasDraw.style.cursor = 'grabbing';
+    canvasDraw.setPointerCapture(e.pointerId);
+    return;
+  }
+  startDraw(e);
+});
+
+canvasDraw.addEventListener('pointermove', e => {
+  lastCursorX = e.clientX; lastCursorY = e.clientY;
+  if (isPanning) {
+    panX = panStartPanX + e.clientX - panMouseStartX;
+    panY = panStartPanY + e.clientY - panMouseStartY;
+    applyZoom();
+    return;
+  }
+  drawCursor(e.clientX, e.clientY);
+  draw(e);
+});
+
+canvasDraw.addEventListener('pointerup', e => {
+  if (isPanning) {
+    isPanning = false;
+    canvasDraw.style.cursor = spaceDown ? 'grab' : 'none';
+    return;
+  }
+  stopDraw();
+});
+
+canvasDraw.addEventListener('pointerleave', e => {
+  cursorVisible = false;
+  cursorCtx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
+  if (!isPanning) { stopDraw(); canvasDraw.style.cursor = 'crosshair'; }
+});
+
+// Touch : 2 doigts = pan, 1 doigt = dessin
+canvasDraw.addEventListener('touchstart', e => {
+  if (e.touches.length === 2) {
+    e.preventDefault();
+    touchPanActive = true;
+    touchPanStartX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+    touchPanStartY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    panStartPanX = panX; panStartPanY = panY;
+    if (isDrawing) stopDraw();
+    return;
+  }
+  startDraw(e);
+}, { passive: false });
+
+canvasDraw.addEventListener('touchmove', e => {
+  if (touchPanActive && e.touches.length === 2) {
+    e.preventDefault();
+    panX = panStartPanX + (e.touches[0].clientX + e.touches[1].clientX) / 2 - touchPanStartX;
+    panY = panStartPanY + (e.touches[0].clientY + e.touches[1].clientY) / 2 - touchPanStartY;
+    applyZoom();
+    return;
+  }
+  draw(e);
+}, { passive: false });
+
+canvasDraw.addEventListener('touchend', e => {
+  if (touchPanActive) {
+    if (e.touches.length < 2) touchPanActive = false;
+    return;
+  }
+  stopDraw();
+}, { passive: false });
 
 // ── Flood Fill (sur canvas de dessin) ────────────────────────
 function hexToRgb(hex) {
@@ -284,6 +467,19 @@ function saveImage() {
   const mCtx = merged.getContext('2d');
   mCtx.drawImage(canvasBase, 0, 0);
   mCtx.drawImage(canvasDraw, 0, 0);
+
+  // Miniature pour l'historique
+  const thumb = document.createElement('canvas');
+  const ratio = Math.min(300 / merged.width, 300 / merged.height);
+  thumb.width  = Math.round(merged.width  * ratio);
+  thumb.height = Math.round(merged.height * ratio);
+  thumb.getContext('2d').drawImage(merged, 0, 0, thumb.width, thumb.height);
+  const title   = sessionStorage.getItem('currentTitle') || 'Dessin libre';
+  const history = JSON.parse(localStorage.getItem('cdHistory') || '[]');
+  history.unshift({ title, thumbnail: thumb.toDataURL('image/jpeg', 0.75), date: new Date().toLocaleDateString('fr-FR') });
+  if (history.length > 12) history.pop();
+  localStorage.setItem('cdHistory', JSON.stringify(history));
+
   const link = document.createElement('a');
   link.download = 'mon-coloriage.png';
   link.href = merged.toDataURL('image/png');
@@ -296,20 +492,18 @@ document.getElementById('colorPalette').addEventListener('click', e => {
   if (!dot) return;
   document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
   dot.classList.add('active');
-  currentColor = dot.dataset.color;
-  document.getElementById('customColor').value = currentColor;
-  if (currentTool === 'eraser') setTool('pen');
+  pickColor(dot.dataset.color);
 });
 
 document.getElementById('customColor').addEventListener('input', e => {
-  currentColor = e.target.value;
+  pickColor(e.target.value);
   document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
-  if (currentTool === 'eraser') setTool('pen');
 });
 
 document.getElementById('sizeSlider').addEventListener('input', e => {
   currentSize = parseInt(e.target.value);
   document.getElementById('sizeVal').textContent = currentSize;
+  refreshCursor();
 });
 
 document.getElementById('opacitySlider').addEventListener('input', e => {
@@ -320,16 +514,37 @@ document.getElementById('opacitySlider').addEventListener('input', e => {
 function setTool(tool) {
   currentTool = tool;
   document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
-  const map = { pen: 'toolPen', brush: 'toolBrush', fill: 'toolFill', eraser: 'toolEraser' };
+  const map = { pen: 'toolPen', brush: 'toolBrush', fill: 'toolFill', eraser: 'toolEraser', eyedrop: 'toolEyedrop' };
   document.getElementById(map[tool])?.classList.add('active');
-  canvasDraw.style.cursor = tool === 'fill' ? 'cell' : tool === 'eraser' ? 'cell' : 'crosshair';
+  canvasDraw.style.cursor = cursorVisible ? 'none' : (tool === 'fill' || tool === 'eyedrop' ? 'cell' : 'crosshair');
+  refreshCursor();
 }
 
-document.getElementById('toolPen').addEventListener('click',    () => setTool('pen'));
-document.getElementById('toolBrush').addEventListener('click',  () => setTool('brush'));
-document.getElementById('toolFill').addEventListener('click',   () => setTool('fill'));
-document.getElementById('toolEraser').addEventListener('click', () => setTool('eraser'));
+// ── Toast ─────────────────────────────────────────────────────
+function showToast(msg, type = 'success') {
+  const t = document.createElement('div');
+  t.className = 'cd-toast cd-toast-' + type;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  requestAnimationFrame(() => t.classList.add('cd-toast-in'));
+  setTimeout(() => {
+    t.classList.remove('cd-toast-in');
+    t.addEventListener('transitionend', () => t.remove());
+  }, 2200);
+}
+
+document.getElementById('toolPen').addEventListener('click',      () => setTool('pen'));
+document.getElementById('toolBrush').addEventListener('click',    () => setTool('brush'));
+document.getElementById('toolFill').addEventListener('click',     () => setTool('fill'));
+document.getElementById('toolEraser').addEventListener('click',   () => setTool('eraser'));
+document.getElementById('toolEyedrop').addEventListener('click',  () => setTool('eyedrop'));
 document.getElementById('undoBtn').addEventListener('click', undo);
+document.getElementById('redoBtn').addEventListener('click', redo);
+
+document.getElementById('stabSlider').addEventListener('input', e => {
+  stabFactor = parseInt(e.target.value) / 10;
+  document.getElementById('stabVal').textContent = e.target.value;
+});
 
 document.getElementById('clearBtn').addEventListener('click', () => {
   if (!confirm('Effacer tout ce que tu as colorié ?')) return;
@@ -338,7 +553,10 @@ document.getElementById('clearBtn').addEventListener('click', () => {
   saveUndo();
 });
 
-document.getElementById('saveBtn').addEventListener('click', saveImage);
+document.getElementById('saveBtn').addEventListener('click', () => {
+  saveImage();
+  showToast('✅ Coloriage sauvegardé !');
+});
 
 // ── Zoom ─────────────────────────────────────────────────────
 const canvasWrap = document.querySelector('.editor-canvas-wrap');
@@ -352,22 +570,47 @@ document.getElementById('zoomOut').addEventListener('click', () => {
   applyZoom();
 });
 document.getElementById('zoomReset').addEventListener('click', () => {
-  zoom = 1;
+  zoom = 1; panX = 0; panY = 0;
   applyZoom();
 });
 
 function applyZoom() {
-  canvasBase.style.transform = `scale(${zoom})`;
-  canvasDraw.style.transform = `scale(${zoom})`;
+  const t = `translate(calc(-50% + ${panX}px), calc(-50% + ${panY}px)) scale(${zoom})`;
+  canvasBase.style.transform = t;
+  canvasDraw.style.transform = t;
 }
 
 // ── Raccourcis clavier ────────────────────────────────────────
 document.addEventListener('keydown', e => {
+  if (e.key === ' ' && !e.ctrlKey) { e.preventDefault(); if (!spaceDown) { spaceDown = true; canvasDraw.style.cursor = 'grab'; } return; }
   if (e.ctrlKey && e.key === 'z') { e.preventDefault(); undo(); }
-  if (e.key === 'p') setTool('pen');
-  if (e.key === 'b') setTool('brush');
-  if (e.key === 'f') setTool('fill');
-  if (e.key === 'e') setTool('eraser');
+  if ((e.ctrlKey && e.key === 'y') || (e.ctrlKey && e.shiftKey && e.key === 'z')) { e.preventDefault(); redo(); }
+  if (!e.ctrlKey && !e.metaKey) {
+    if (e.key === 'p') setTool('pen');
+    if (e.key === 'b') setTool('brush');
+    if (e.key === 'f') setTool('fill');
+    if (e.key === 'e') setTool('eraser');
+    if (e.key === 'i') setTool('eyedrop');
+    if (e.key === '[') {
+      currentSize = Math.max(1, currentSize - 2);
+      document.getElementById('sizeSlider').value = currentSize;
+      document.getElementById('sizeVal').textContent = currentSize;
+      refreshCursor();
+    }
+    if (e.key === ']') {
+      currentSize = Math.min(60, currentSize + 2);
+      document.getElementById('sizeSlider').value = currentSize;
+      document.getElementById('sizeVal').textContent = currentSize;
+      refreshCursor();
+    }
+  }
+});
+
+document.addEventListener('keyup', e => {
+  if (e.key === ' ') {
+    spaceDown = false;
+    if (!isPanning) canvasDraw.style.cursor = cursorVisible ? 'none' : 'crosshair';
+  }
 });
 
 // Lancer
