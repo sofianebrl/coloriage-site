@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useStore } from "@/lib/store";
 import {
   Button,
-  Card,
   EmptyState,
   Field,
   Modal,
@@ -98,9 +97,13 @@ export default function MembresPage() {
         />
       ) : (
         <div className="space-y-2">
-          {members.map((m) => (
-            <Card key={m.id} className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-700 text-sm font-bold text-white">
+          {members.map((m, i) => (
+            <div
+              key={m.id}
+              className="animate-rise flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-150 hover:border-slate-300 hover:shadow"
+              style={{ animationDelay: `${i * 40}ms` }}
+            >
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-100 text-sm font-bold text-slate-700">
                 {m.jerseyNumber ? (
                   m.jerseyNumber
                 ) : (
@@ -114,10 +117,10 @@ export default function MembresPage() {
                 href={`/membres/${m.id}`}
                 className="min-w-0 flex-1 text-left"
               >
-                <p className="truncate font-medium text-white">
+                <p className="truncate font-medium text-slate-900">
                   {m.firstName} {m.lastName}
                 </p>
-                <p className="truncate text-xs text-slate-400">
+                <p className="truncate text-xs text-slate-500">
                   {[m.position, m.phone].filter(Boolean).join(" · ") || "—"}
                 </p>
               </Link>
@@ -126,7 +129,7 @@ export default function MembresPage() {
                   if (confirm(`Supprimer ${m.firstName} ${m.lastName} ?`))
                     deleteMember(m.id);
                 }}
-                className="rounded-lg p-2 text-slate-500 hover:bg-slate-700 hover:text-red-400"
+                className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-red-50 hover:text-red-600"
                 aria-label="Supprimer"
               >
                 <svg
@@ -141,7 +144,7 @@ export default function MembresPage() {
                   <path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m2 0v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6" />
                 </svg>
               </button>
-            </Card>
+            </div>
           ))}
         </div>
       )}

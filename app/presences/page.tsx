@@ -88,13 +88,13 @@ export default function PresencesPage() {
       ) : (
         <>
           <div className="mb-4">
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
               Séance
             </label>
             <select
               value={sessionId}
               onChange={(e) => setSessionId(e.target.value)}
-              className="w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-sm font-medium text-white focus:border-emerald-500 focus:outline-none"
+              className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-900 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
             >
               {sessions.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -106,23 +106,27 @@ export default function PresencesPage() {
           </div>
 
           <Card className="mb-4 flex items-center justify-between">
-            <span className="text-sm text-slate-400">Présents</span>
-            <span className="text-lg font-bold text-emerald-400">
+            <span className="text-sm text-slate-500">Présents</span>
+            <span className="text-lg font-bold text-emerald-600">
               {presentCount}/{members.length}
             </span>
           </Card>
 
           <div className="space-y-2">
-            {members.map((m) => {
+            {members.map((m, i) => {
               const status = sessionAttendance[m.id] ?? "inconnu";
               return (
-                <Card key={m.id} className="flex items-center gap-3">
+                <Card
+                  key={m.id}
+                  className="animate-rise flex items-center gap-3"
+                  style={{ animationDelay: `${i * 35}ms` }}
+                >
                   <div className="min-w-0 flex-1">
-                    <p className="truncate font-medium text-white">
+                    <p className="truncate font-medium text-slate-900">
                       {m.firstName} {m.lastName}
                     </p>
                     {m.jerseyNumber && (
-                      <p className="text-xs text-slate-400">
+                      <p className="text-xs text-slate-500">
                         N°{m.jerseyNumber}
                       </p>
                     )}
@@ -138,10 +142,10 @@ export default function PresencesPage() {
                             status === opt.key ? "inconnu" : opt.key
                           )
                         }
-                        className={`rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors ${
+                        className={`rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all duration-150 active:scale-95 ${
                           status === opt.key
                             ? opt.active
-                            : "bg-slate-700/60 text-slate-400 hover:bg-slate-700"
+                            : "bg-slate-100 text-slate-500 hover:bg-slate-200"
                         }`}
                       >
                         {opt.label}

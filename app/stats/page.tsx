@@ -59,42 +59,49 @@ export default function StatsPage() {
       ) : (
         <>
           <div className="mb-5 grid grid-cols-2 gap-3">
-            <div className="rounded-2xl bg-gradient-to-br from-blue-500/25 to-slate-800/40 p-4 ring-1 ring-blue-500/20">
-              <p className="text-3xl font-extrabold text-white">
+            <Card className="animate-rise">
+              <p className="text-3xl font-extrabold text-slate-900">
                 {totalSessions}
               </p>
-              <p className="text-sm text-slate-300">séances passées</p>
-            </div>
-            <div className="rounded-2xl bg-gradient-to-br from-emerald-500/25 to-slate-800/40 p-4 ring-1 ring-emerald-500/20">
-              <p className="text-3xl font-extrabold text-emerald-300">
+              <p className="text-sm text-slate-500">séances passées</p>
+            </Card>
+            <Card className="animate-rise" >
+              <p className="text-3xl font-extrabold text-blue-600">
                 {average}%
               </p>
-              <p className="text-sm text-slate-300">présence moyenne</p>
-            </div>
+              <p className="text-sm text-slate-500">présence moyenne</p>
+            </Card>
           </div>
 
           <div className="space-y-2">
             {stats.map((s, i) => (
-              <Link key={s.member.id} href={`/membres/${s.member.id}`}>
-                <Card className="transition-colors hover:border-slate-600">
+              <Link
+                key={s.member.id}
+                href={`/membres/${s.member.id}`}
+                className="animate-rise block"
+                style={{ animationDelay: `${i * 50}ms` }}
+              >
+                <Card className="transition-all duration-150 hover:border-slate-300 hover:shadow active:scale-[0.99]">
                   <div className="mb-2 flex items-center gap-3">
-                    <span className="w-5 text-center text-sm font-bold text-slate-500">
+                    <span className="w-5 text-center text-sm font-bold text-slate-400">
                       {i + 1}
                     </span>
-                    <span className="min-w-0 flex-1 truncate font-medium text-white">
+                    <span className="min-w-0 flex-1 truncate font-medium text-slate-900">
                       {s.member.firstName} {s.member.lastName}
                     </span>
-                    <span className="text-sm font-bold text-white">
+                    <span className="text-sm font-bold text-slate-900">
                       {s.rate}%
                     </span>
                   </div>
-                  <div className="h-2 w-full overflow-hidden rounded-full bg-slate-700">
+                  <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
                     <div
-                      className={`h-full rounded-full ${rateColor(s.rate)}`}
+                      className={`h-full rounded-full transition-[width] duration-700 ease-out ${rateColor(
+                        s.rate
+                      )}`}
                       style={{ width: `${s.rate}%` }}
                     />
                   </div>
-                  <p className="mt-1.5 text-xs text-slate-400">
+                  <p className="mt-1.5 text-xs text-slate-500">
                     {s.present} présent{s.present > 1 ? "s" : ""} · {s.absent}{" "}
                     absent{s.absent > 1 ? "s" : ""} · {s.excuse} excusé
                     {s.excuse > 1 ? "s" : ""}

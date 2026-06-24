@@ -17,10 +17,10 @@ import { formatDate, formatTime } from "@/lib/format";
 import type { AttendanceStatus } from "@/lib/types";
 
 const STATUS_LABEL: Record<AttendanceStatus, { label: string; cls: string }> = {
-  present: { label: "Présent", cls: "bg-emerald-500/20 text-emerald-300" },
-  absent: { label: "Absent", cls: "bg-red-500/20 text-red-300" },
-  excuse: { label: "Excusé", cls: "bg-amber-500/20 text-amber-300" },
-  inconnu: { label: "Non pointé", cls: "bg-slate-700 text-slate-400" },
+  present: { label: "Présent", cls: "bg-emerald-50 text-emerald-700" },
+  absent: { label: "Absent", cls: "bg-red-50 text-red-700" },
+  excuse: { label: "Excusé", cls: "bg-amber-50 text-amber-700" },
+  inconnu: { label: "Non pointé", cls: "bg-slate-100 text-slate-500" },
 };
 
 export default function MemberDetailPage() {
@@ -96,12 +96,15 @@ export default function MemberDetailPage() {
 
   return (
     <div>
-      <Link href="/membres" className="text-sm text-emerald-400">
+      <Link
+        href="/membres"
+        className="text-sm font-medium text-blue-600 hover:underline"
+      >
         ← Retour aux membres
       </Link>
 
-      <div className="mb-6 mt-4 flex items-center gap-4">
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-slate-700 text-xl font-bold text-white">
+      <div className="animate-rise mb-6 mt-4 flex items-center gap-4">
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xl font-bold text-slate-700">
           {member.jerseyNumber || (
             <span>
               {member.firstName[0]}
@@ -110,10 +113,10 @@ export default function MemberDetailPage() {
           )}
         </div>
         <div className="min-w-0 flex-1">
-          <h1 className="truncate text-2xl font-bold text-white">
+          <h1 className="truncate text-2xl font-bold tracking-tight text-slate-900">
             {member.firstName} {member.lastName}
           </h1>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-500">
             {[member.position, member.jerseyNumber && `N°${member.jerseyNumber}`]
               .filter(Boolean)
               .join(" · ") || "—"}
@@ -144,20 +147,20 @@ export default function MemberDetailPage() {
       </div>
 
       {stats && stats.total > 0 && (
-        <Card className="mb-6">
+        <Card className="animate-rise mb-6">
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-sm text-slate-400">Taux de présence</span>
-            <span className="text-lg font-bold text-emerald-400">
+            <span className="text-sm text-slate-500">Taux de présence</span>
+            <span className="text-lg font-bold text-emerald-600">
               {stats.rate}%
             </span>
           </div>
-          <div className="h-2 w-full overflow-hidden rounded-full bg-slate-700">
+          <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
             <div
-              className="h-full rounded-full bg-emerald-500"
+              className="h-full rounded-full bg-emerald-500 transition-[width] duration-700 ease-out"
               style={{ width: `${stats.rate}%` }}
             />
           </div>
-          <p className="mt-2 text-xs text-slate-400">
+          <p className="mt-2 text-xs text-slate-500">
             {stats.present} présent{stats.present > 1 ? "s" : ""} · {stats.absent}{" "}
             absent{stats.absent > 1 ? "s" : ""} · {stats.excuse} excusé
             {stats.excuse > 1 ? "s" : ""} sur {stats.total} séance
@@ -166,7 +169,7 @@ export default function MemberDetailPage() {
         </Card>
       )}
 
-      <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-500">
+      <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
         Historique des présences
       </h2>
       {history.length === 0 ? (
@@ -176,13 +179,17 @@ export default function MemberDetailPage() {
         />
       ) : (
         <div className="space-y-2">
-          {history.map(({ session, status }) => (
-            <Card key={session.id} className="flex items-center gap-3">
+          {history.map(({ session, status }, i) => (
+            <Card
+              key={session.id}
+              className="animate-rise flex items-center gap-3"
+              style={{ animationDelay: `${i * 40}ms` }}
+            >
               <div className="min-w-0 flex-1">
-                <p className="truncate font-medium text-white">
+                <p className="truncate font-medium text-slate-900">
                   {session.title}
                 </p>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-500">
                   {formatDate(session.date)} · {formatTime(session.date)}
                 </p>
               </div>

@@ -12,12 +12,12 @@ export function PageHeader({
   action?: ReactNode;
 }) {
   return (
-    <div className="mb-6 flex items-start justify-between gap-4">
+    <div className="animate-rise mb-6 flex items-start justify-between gap-4">
       <div>
-        <h1 className="bg-gradient-to-r from-white to-slate-400 bg-clip-text text-3xl font-extrabold tracking-tight text-transparent">
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900">
           {title}
         </h1>
-        {subtitle && <p className="mt-1 text-sm text-slate-400">{subtitle}</p>}
+        {subtitle && <p className="mt-1 text-sm text-slate-500">{subtitle}</p>}
       </div>
       {action}
     </div>
@@ -27,13 +27,16 @@ export function PageHeader({
 export function Card({
   children,
   className = "",
+  style,
 }: {
   children: ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   return (
     <div
-      className={`rounded-2xl border border-slate-800 bg-slate-800/50 p-4 ${className}`}
+      className={`rounded-2xl border border-slate-200 bg-white p-4 shadow-sm ${className}`}
+      style={style}
     >
       {children}
     </div>
@@ -50,10 +53,10 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="rounded-2xl border border-dashed border-slate-700 bg-slate-800/30 p-8 text-center">
-      <p className="font-medium text-slate-200">{title}</p>
+    <div className="animate-rise rounded-2xl border border-dashed border-slate-300 bg-white/60 p-8 text-center">
+      <p className="font-semibold text-slate-800">{title}</p>
       {description && (
-        <p className="mx-auto mt-1 max-w-sm text-sm text-slate-400">
+        <p className="mx-auto mt-1 max-w-sm text-sm text-slate-500">
           {description}
         </p>
       )}
@@ -81,10 +84,11 @@ export function Button({
 }: ButtonProps) {
   const styles = {
     primary:
-      "bg-emerald-500 text-slate-950 hover:bg-emerald-400 disabled:opacity-50",
+      "bg-blue-600 text-white hover:bg-blue-700 shadow-sm disabled:opacity-50",
     ghost:
-      "bg-slate-700/60 text-slate-100 hover:bg-slate-700 disabled:opacity-50",
-    danger: "bg-red-500/90 text-white hover:bg-red-500 disabled:opacity-50",
+      "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 disabled:opacity-50",
+    danger:
+      "bg-white text-red-600 border border-red-200 hover:bg-red-50 disabled:opacity-50",
   }[variant];
 
   return (
@@ -92,7 +96,7 @@ export function Button({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-colors disabled:cursor-not-allowed ${styles} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-all duration-150 active:scale-[0.97] disabled:cursor-not-allowed disabled:active:scale-100 ${styles} ${className}`}
     >
       {children}
     </button>
@@ -113,18 +117,18 @@ export function Modal({
   if (!open) return null;
   return (
     <div
-      className="fixed inset-0 z-30 flex items-end justify-center bg-black/60 p-0 sm:items-center sm:p-4"
+      className="animate-fade-in fixed inset-0 z-30 flex items-end justify-center bg-slate-900/30 p-0 backdrop-blur-sm sm:items-center sm:p-4"
       onClick={onClose}
     >
       <div
-        className="animate-fade-in w-full max-w-md rounded-t-3xl border border-slate-700 bg-slate-900 p-5 sm:rounded-2xl"
+        className="animate-slide-up w-full max-w-md rounded-t-3xl border border-slate-200 bg-white p-5 shadow-xl sm:rounded-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-white">{title}</h2>
+          <h2 className="text-lg font-semibold text-slate-900">{title}</h2>
           <button
             onClick={onClose}
-            className="rounded-lg p-1 text-slate-400 hover:bg-slate-800 hover:text-white"
+            className="rounded-lg p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700"
             aria-label="Fermer"
           >
             <svg
@@ -154,7 +158,7 @@ export function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-slate-300">
+      <span className="mb-1 block text-sm font-medium text-slate-700">
         {label}
       </span>
       {children}
@@ -163,4 +167,4 @@ export function Field({
 }
 
 export const inputClass =
-  "w-full rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none";
+  "w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none";

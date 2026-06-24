@@ -15,7 +15,7 @@ export function Nav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-20 border-t border-slate-800 bg-slate-900/95 backdrop-blur">
+    <nav className="fixed inset-x-0 bottom-0 z-20 border-t border-slate-200 bg-white/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-3xl items-stretch justify-around">
         {items.map((item) => {
           const active =
@@ -27,18 +27,13 @@ export function Nav() {
             <Link
               key={item.href}
               href={item.href}
-              className={`relative flex flex-1 flex-col items-center gap-1 py-3 text-[11px] font-medium transition-colors ${
-                active
-                  ? "text-emerald-400"
-                  : "text-slate-400 hover:text-slate-200"
+              className={`relative flex flex-1 flex-col items-center gap-1 py-2.5 text-[11px] font-medium transition-colors duration-200 ${
+                active ? "text-blue-600" : "text-slate-400 hover:text-slate-600"
               }`}
             >
-              {active && (
-                <span className="absolute top-0 h-0.5 w-8 rounded-full bg-emerald-400" />
-              )}
               <span
-                className={`flex h-7 w-7 items-center justify-center rounded-full transition-colors ${
-                  active ? "bg-emerald-500/15" : ""
+                className={`flex h-8 w-8 items-center justify-center rounded-xl transition-all duration-200 ${
+                  active ? "scale-105 bg-blue-50" : ""
                 }`}
               >
                 <Icon className="h-5 w-5" />

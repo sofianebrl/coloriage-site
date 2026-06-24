@@ -135,15 +135,15 @@ export default function CalendrierPage() {
 
       <GroupSelector />
 
-      <div className="mb-4 inline-flex rounded-xl border border-slate-700 bg-slate-800 p-1">
+      <div className="mb-4 inline-flex rounded-xl border border-slate-200 bg-white p-1 shadow-sm">
         {(["liste", "mois"] as const).map((v) => (
           <button
             key={v}
             onClick={() => setView(v)}
-            className={`rounded-lg px-4 py-1.5 text-sm font-semibold transition-colors ${
+            className={`rounded-lg px-4 py-1.5 text-sm font-semibold transition-all duration-150 active:scale-95 ${
               view === v
-                ? "bg-emerald-500 text-slate-950"
-                : "text-slate-300 hover:text-white"
+                ? "bg-blue-600 text-white shadow-sm"
+                : "text-slate-500 hover:text-slate-900"
             }`}
           >
             {v === "liste" ? "Liste" : "Mois"}
@@ -180,10 +180,10 @@ export default function CalendrierPage() {
                 key={t}
                 type="button"
                 onClick={() => setForm({ ...form, type: t })}
-                className={`rounded-xl border px-3 py-2 text-sm font-semibold transition-colors ${
+                className={`rounded-xl border px-3 py-2 text-sm font-semibold transition-all duration-150 active:scale-[0.98] ${
                   form.type === t
-                    ? "border-emerald-500 bg-emerald-500/15 text-emerald-300"
-                    : "border-slate-700 bg-slate-800 text-slate-300"
+                    ? "border-blue-500 bg-blue-50 text-blue-700"
+                    : "border-slate-200 bg-white text-slate-500 hover:bg-slate-50"
                 }`}
               >
                 {t === "match" ? "Match" : "Entraînement"}
@@ -264,22 +264,21 @@ function SessionGroup({
   if (sessions.length === 0) return null;
   return (
     <div className={muted ? "opacity-70" : ""}>
-      <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-500">
+      <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
         {title}
       </h2>
       <div className="space-y-2">
-        {sessions.map((s) => (
+        {sessions.map((s, i) => (
           <div
             key={s.id}
-            className={`flex items-start gap-3 rounded-2xl border border-slate-800 border-l-4 bg-slate-800/50 p-4 ${
-              s.type === "match" ? "border-l-amber-400" : "border-l-emerald-400"
-            }`}
+            className="animate-rise flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-150 hover:border-slate-300 hover:shadow"
+            style={{ animationDelay: `${i * 40}ms` }}
           >
             <div
               className={`flex w-14 shrink-0 flex-col items-center rounded-lg py-1.5 ${
                 s.type === "match"
-                  ? "bg-amber-500/15 text-amber-300"
-                  : "bg-emerald-500/15 text-emerald-300"
+                  ? "bg-amber-50 text-amber-700"
+                  : "bg-emerald-50 text-emerald-700"
               }`}
             >
               <span className="text-lg font-bold leading-none">
@@ -299,21 +298,21 @@ function SessionGroup({
                 <span
                   className={`rounded px-1.5 py-0.5 text-[10px] font-semibold ${
                     s.type === "match"
-                      ? "bg-amber-500/20 text-amber-300"
-                      : "bg-emerald-500/20 text-emerald-300"
+                      ? "bg-amber-50 text-amber-700"
+                      : "bg-emerald-50 text-emerald-700"
                   }`}
                 >
                   {s.type === "match" ? "MATCH" : "ENTR."}
                 </span>
-                <span className="truncate font-medium text-white">
+                <span className="truncate font-medium text-slate-900">
                   {s.title}
                 </span>
               </div>
-              <p className="mt-1 text-xs text-slate-400">
+              <p className="mt-1 text-xs text-slate-500">
                 {formatDate(s.date)} · {formatTime(s.date)}
               </p>
               {(s.location || s.opponent) && (
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-400">
                   {[s.opponent && `vs ${s.opponent}`, s.location]
                     .filter(Boolean)
                     .join(" · ")}
@@ -324,7 +323,7 @@ function SessionGroup({
               onClick={() => {
                 if (confirm(`Supprimer « ${s.title} » ?`)) onDelete(s.id);
               }}
-              className="rounded-lg p-2 text-slate-500 hover:bg-slate-700 hover:text-red-400"
+              className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-red-50 hover:text-red-600"
               aria-label="Supprimer"
             >
               <svg

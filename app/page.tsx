@@ -82,49 +82,52 @@ export default function HomePage() {
 
           {group && stats && (
             <div className="space-y-6">
-              <div
-                className="relative overflow-hidden rounded-3xl p-5 shadow-xl"
-                style={{
-                  backgroundColor: "#0f172a",
-                  backgroundImage: `linear-gradient(135deg, ${group.color} 0%, rgba(15,23,42,0.55) 78%)`,
-                }}
-              >
-                <p className="text-xs font-semibold uppercase tracking-widest text-white/80">
-                  {group.sport}
-                </p>
-                <h2 className="mt-1 text-3xl font-extrabold text-white drop-shadow">
+              <div className="animate-rise rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <div className="flex items-center gap-2">
+                  <span
+                    className="h-2.5 w-2.5 rounded-full"
+                    style={{ backgroundColor: group.color }}
+                  />
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                    {group.sport}
+                  </p>
+                </div>
+                <h2 className="mt-1 text-2xl font-bold tracking-tight text-slate-900">
                   {group.name}
                 </h2>
                 <div className="mt-4 grid grid-cols-2 gap-3">
                   <Link
                     href="/membres"
-                    className="rounded-2xl bg-black/25 px-4 py-3 backdrop-blur-sm transition-colors hover:bg-black/35"
+                    className="rounded-xl border border-slate-200 px-4 py-3 transition-all duration-150 hover:border-slate-300 hover:bg-slate-50 active:scale-[0.98]"
                   >
-                    <p className="text-2xl font-bold text-white">
+                    <p className="text-2xl font-bold text-slate-900">
                       {stats.memberCount}
                     </p>
-                    <p className="text-xs font-medium text-white/80">membres</p>
+                    <p className="text-xs font-medium text-slate-500">membres</p>
                   </Link>
                   <Link
                     href="/calendrier"
-                    className="rounded-2xl bg-black/25 px-4 py-3 backdrop-blur-sm transition-colors hover:bg-black/35"
+                    className="rounded-xl border border-slate-200 px-4 py-3 transition-all duration-150 hover:border-slate-300 hover:bg-slate-50 active:scale-[0.98]"
                   >
-                    <p className="text-2xl font-bold text-white">
+                    <p className="text-2xl font-bold text-slate-900">
                       {stats.sessionCount}
                     </p>
-                    <p className="text-xs font-medium text-white/80">séances</p>
+                    <p className="text-xs font-medium text-slate-500">séances</p>
                   </Link>
                 </div>
               </div>
 
-              <div>
+              <div
+                className="animate-rise"
+                style={{ animationDelay: "60ms" }}
+              >
                 <div className="mb-2 flex items-center justify-between">
-                  <h2 className="text-lg font-semibold text-white">
+                  <h2 className="text-base font-semibold text-slate-900">
                     Prochaines séances
                   </h2>
                   <Link
                     href="/calendrier"
-                    className="text-sm text-emerald-400 hover:underline"
+                    className="text-sm font-medium text-blue-600 hover:underline"
                   >
                     Tout voir
                   </Link>
@@ -141,33 +144,31 @@ export default function HomePage() {
                   />
                 ) : (
                   <div className="space-y-2">
-                    {stats.upcoming.slice(0, 4).map((s) => (
-                      <div
+                    {stats.upcoming.slice(0, 4).map((s, i) => (
+                      <Link
                         key={s.id}
-                        className={`flex items-center gap-3 overflow-hidden rounded-2xl border-l-4 bg-slate-800/50 p-4 ${
-                          s.type === "match"
-                            ? "border-amber-400"
-                            : "border-emerald-400"
-                        }`}
+                        href="/calendrier"
+                        className="animate-rise flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-150 hover:border-slate-300 hover:shadow active:scale-[0.99]"
+                        style={{ animationDelay: `${100 + i * 50}ms` }}
                       >
                         <span
-                          className={`rounded-lg px-2 py-1 text-xs font-semibold ${
+                          className={`shrink-0 rounded-lg px-2 py-1 text-xs font-semibold ${
                             s.type === "match"
-                              ? "bg-amber-500/20 text-amber-300"
-                              : "bg-emerald-500/20 text-emerald-300"
+                              ? "bg-amber-50 text-amber-700"
+                              : "bg-emerald-50 text-emerald-700"
                           }`}
                         >
                           {s.type === "match" ? "Match" : "Entraînement"}
                         </span>
                         <div className="min-w-0 flex-1">
-                          <p className="truncate font-medium text-white">
+                          <p className="truncate font-medium text-slate-900">
                             {s.title}
                           </p>
-                          <p className="text-xs text-slate-400">
+                          <p className="text-xs text-slate-500">
                             {formatDate(s.date)} · {formatTime(s.date)}
                           </p>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 )}
@@ -221,7 +222,9 @@ export default function HomePage() {
                   type="button"
                   onClick={() => setColor(c)}
                   className={`h-8 w-8 rounded-full transition-transform ${
-                    color === c ? "scale-110 ring-2 ring-white" : ""
+                    color === c
+                      ? "scale-110 ring-2 ring-slate-900 ring-offset-2"
+                      : ""
                   }`}
                   style={{ backgroundColor: c }}
                   aria-label={`Couleur ${c}`}
