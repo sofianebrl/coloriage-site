@@ -82,23 +82,39 @@ export default function HomePage() {
 
           {group && stats && (
             <div className="space-y-6">
-              <div className="grid grid-cols-2 gap-3">
-                <Link href="/membres">
-                  <Card className="transition-colors hover:border-slate-600">
-                    <p className="text-3xl font-bold text-white">
+              <div
+                className="relative overflow-hidden rounded-3xl p-5 shadow-xl"
+                style={{
+                  backgroundColor: "#0f172a",
+                  backgroundImage: `linear-gradient(135deg, ${group.color} 0%, rgba(15,23,42,0.55) 78%)`,
+                }}
+              >
+                <p className="text-xs font-semibold uppercase tracking-widest text-white/80">
+                  {group.sport}
+                </p>
+                <h2 className="mt-1 text-3xl font-extrabold text-white drop-shadow">
+                  {group.name}
+                </h2>
+                <div className="mt-4 grid grid-cols-2 gap-3">
+                  <Link
+                    href="/membres"
+                    className="rounded-2xl bg-black/25 px-4 py-3 backdrop-blur-sm transition-colors hover:bg-black/35"
+                  >
+                    <p className="text-2xl font-bold text-white">
                       {stats.memberCount}
                     </p>
-                    <p className="text-sm text-slate-400">membres</p>
-                  </Card>
-                </Link>
-                <Link href="/calendrier">
-                  <Card className="transition-colors hover:border-slate-600">
-                    <p className="text-3xl font-bold text-white">
+                    <p className="text-xs font-medium text-white/80">membres</p>
+                  </Link>
+                  <Link
+                    href="/calendrier"
+                    className="rounded-2xl bg-black/25 px-4 py-3 backdrop-blur-sm transition-colors hover:bg-black/35"
+                  >
+                    <p className="text-2xl font-bold text-white">
                       {stats.sessionCount}
                     </p>
-                    <p className="text-sm text-slate-400">séances</p>
-                  </Card>
-                </Link>
+                    <p className="text-xs font-medium text-white/80">séances</p>
+                  </Link>
+                </div>
               </div>
 
               <div>
@@ -126,7 +142,14 @@ export default function HomePage() {
                 ) : (
                   <div className="space-y-2">
                     {stats.upcoming.slice(0, 4).map((s) => (
-                      <Card key={s.id} className="flex items-center gap-3">
+                      <div
+                        key={s.id}
+                        className={`flex items-center gap-3 overflow-hidden rounded-2xl border-l-4 bg-slate-800/50 p-4 ${
+                          s.type === "match"
+                            ? "border-amber-400"
+                            : "border-emerald-400"
+                        }`}
+                      >
                         <span
                           className={`rounded-lg px-2 py-1 text-xs font-semibold ${
                             s.type === "match"
@@ -144,7 +167,7 @@ export default function HomePage() {
                             {formatDate(s.date)} · {formatTime(s.date)}
                           </p>
                         </div>
-                      </Card>
+                      </div>
                     ))}
                   </div>
                 )}

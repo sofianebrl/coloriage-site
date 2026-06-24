@@ -59,14 +59,18 @@ export default function StatsPage() {
       ) : (
         <>
           <div className="mb-5 grid grid-cols-2 gap-3">
-            <Card>
-              <p className="text-3xl font-bold text-white">{totalSessions}</p>
-              <p className="text-sm text-slate-400">séances passées</p>
-            </Card>
-            <Card>
-              <p className="text-3xl font-bold text-emerald-400">{average}%</p>
-              <p className="text-sm text-slate-400">présence moyenne</p>
-            </Card>
+            <div className="rounded-2xl bg-gradient-to-br from-blue-500/25 to-slate-800/40 p-4 ring-1 ring-blue-500/20">
+              <p className="text-3xl font-extrabold text-white">
+                {totalSessions}
+              </p>
+              <p className="text-sm text-slate-300">séances passées</p>
+            </div>
+            <div className="rounded-2xl bg-gradient-to-br from-emerald-500/25 to-slate-800/40 p-4 ring-1 ring-emerald-500/20">
+              <p className="text-3xl font-extrabold text-emerald-300">
+                {average}%
+              </p>
+              <p className="text-sm text-slate-300">présence moyenne</p>
+            </div>
           </div>
 
           <div className="space-y-2">

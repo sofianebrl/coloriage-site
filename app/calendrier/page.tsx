@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import { useStore } from "@/lib/store";
 import {
   Button,
-  Card,
   EmptyState,
   Field,
   Modal,
@@ -270,12 +269,23 @@ function SessionGroup({
       </h2>
       <div className="space-y-2">
         {sessions.map((s) => (
-          <Card key={s.id} className="flex items-start gap-3">
-            <div className="flex w-14 shrink-0 flex-col items-center rounded-lg bg-slate-700/60 py-1.5">
-              <span className="text-lg font-bold leading-none text-white">
+          <div
+            key={s.id}
+            className={`flex items-start gap-3 rounded-2xl border border-slate-800 border-l-4 bg-slate-800/50 p-4 ${
+              s.type === "match" ? "border-l-amber-400" : "border-l-emerald-400"
+            }`}
+          >
+            <div
+              className={`flex w-14 shrink-0 flex-col items-center rounded-lg py-1.5 ${
+                s.type === "match"
+                  ? "bg-amber-500/15 text-amber-300"
+                  : "bg-emerald-500/15 text-emerald-300"
+              }`}
+            >
+              <span className="text-lg font-bold leading-none">
                 {new Date(s.date).getDate()}
               </span>
-              <span className="text-[10px] uppercase text-slate-400">
+              <span className="text-[10px] uppercase opacity-80">
                 {new Date(s.date).toLocaleDateString("fr-FR", {
                   month: "short",
                 })}
@@ -329,7 +339,7 @@ function SessionGroup({
                 <path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m2 0v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6" />
               </svg>
             </button>
-          </Card>
+          </div>
         ))}
       </div>
     </div>

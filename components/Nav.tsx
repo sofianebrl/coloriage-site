@@ -27,13 +27,22 @@ export function Nav() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex flex-1 flex-col items-center gap-1 py-3 text-[11px] transition-colors ${
+              className={`relative flex flex-1 flex-col items-center gap-1 py-3 text-[11px] font-medium transition-colors ${
                 active
                   ? "text-emerald-400"
                   : "text-slate-400 hover:text-slate-200"
               }`}
             >
-              <Icon className="h-6 w-6" />
+              {active && (
+                <span className="absolute top-0 h-0.5 w-8 rounded-full bg-emerald-400" />
+              )}
+              <span
+                className={`flex h-7 w-7 items-center justify-center rounded-full transition-colors ${
+                  active ? "bg-emerald-500/15" : ""
+                }`}
+              >
+                <Icon className="h-5 w-5" />
+              </span>
               {item.label}
             </Link>
           );
