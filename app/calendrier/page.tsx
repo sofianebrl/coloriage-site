@@ -12,6 +12,7 @@ import {
   inputClass,
 } from "@/components/ui";
 import { GroupSelector } from "@/components/GroupSelector";
+import { MonthCalendar } from "@/components/MonthCalendar";
 import type { Session, SessionType } from "@/lib/types";
 import {
   formatDate,
@@ -55,16 +56,22 @@ export default function CalendrierPage() {
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<Session | null>(null);
   const [form, setForm] = useState<FormState>(defaultForm);
+  const [view, setView] = useState<"liste" | "mois">("liste");
+
+  const groupSessions = useMemo(
+    () => data.sessions.filter((s) => s.groupId === selectedGroupId),
+    [data.sessions, selectedGroupId]
+  );
 
   const { upcoming, past } = useMemo(() => {
-    const sessions = data.sessions
-      .filter((s) => s.groupId === selectedGroupId)
-      .sort((a, b) => +new Date(a.date) - +new Date(b.date));
+    const sessions = [...groupSessions].sort(
+      (a, b) => +new Date(a.date) - +new Date(b.date)
+    );
     return {
       upcoming: sessions.filter((s) => isUpcoming(s.date)),
       past: sessions.filter((s) => !isUpcoming(s.date)).reverse(),
     };
-  }, [data.sessions, selectedGroupId]);
+  }, [groupSessions]);
 
   if (!ready) return <p className="text-slate-400">Chargement…</p>;
 
@@ -129,12 +136,30 @@ export default function CalendrierPage() {
 
       <GroupSelector />
 
+      <div className="mb-4 inline-flex rounded-xl border border-slate-700 bg-slate-800 p-1">
+        {(["liste", "mois"] as const).map((v) => (
+          <button
+            key={v}
+            onClick={() => setView(v)}
+            className={`rounded-lg px-4 py-1.5 text-sm font-semibold transition-colors ${
+              view === v
+                ? "bg-emerald-500 text-slate-950"
+                : "text-slate-300 hover:text-white"
+            }`}
+          >
+            {v === "liste" ? "Liste" : "Mois"}
+          </button>
+        ))}
+      </div>
+
       {upcoming.length === 0 && past.length === 0 ? (
         <EmptyState
           title="Aucune séance planifiée"
           description="Ajoutez un entraînement ou un match."
           action={<Button onClick={openCreate}>Planifier une séance</Button>}
         />
+      ) : view === "mois" ? (
+        <MonthCalendar sessions={groupSessions} onEdit={openEdit} />
       ) : (
         <div className="space-y-6">
           <SessionGroup title="À venir" sessions={upcoming} onEdit={openEdit} onDelete={deleteSession} />

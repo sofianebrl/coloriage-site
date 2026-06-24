@@ -9,9 +9,13 @@ comme sur ordinateur.
 - **Groupes / équipes** — créez plusieurs équipes, chacune avec sa couleur.
 - **Membres** — fiches joueurs (nom, n° de maillot, poste, téléphone du parent).
 - **Calendrier** — planifiez entraînements et matchs (date, lieu, adversaire, notes),
-  séparés en « à venir » et « passées ».
+  en vue **liste** (à venir / passées) ou en vue **mois** (grille agenda).
 - **Présences** — faites l'appel en un tap (présent / absent / excusé) avec le
   compteur de présents.
+- **Statistiques** — taux de présence par joueur sur la saison, classé du plus
+  assidu au moins assidu, avec moyenne du groupe.
+- **Fiche joueur** — page dédiée par joueur : infos, bouton d'appel, taux de
+  présence et historique des séances.
 - **Installable** — fonctionne comme une appli (PWA) sur téléphone.
 
 ## Stack technique
@@ -62,6 +66,4 @@ toucher aux pages.
 
 - 🔐 Comptes coachs + base de données partagée (synchro multi-appareils)
 - 📣 Communication : convocations, annonces et rappels aux membres
-- 📊 Statistiques de présence sur la saison
-- 📅 Vue calendrier mensuelle
 - 🧑‍🤝‍🧑 Partage du planning avec les joueurs/parents

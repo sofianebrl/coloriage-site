@@ -8,6 +8,7 @@ const items = [
   { href: "/membres", label: "Membres", icon: UsersIcon },
   { href: "/calendrier", label: "Calendrier", icon: CalendarIcon },
   { href: "/presences", label: "Présences", icon: CheckIcon },
+  { href: "/stats", label: "Stats", icon: ChartIcon },
 ];
 
 export function Nav() {
@@ -26,7 +27,7 @@ export function Nav() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex flex-1 flex-col items-center gap-1 py-3 text-xs transition-colors ${
+              className={`flex flex-1 flex-col items-center gap-1 py-3 text-[11px] transition-colors ${
                 active
                   ? "text-emerald-400"
                   : "text-slate-400 hover:text-slate-200"
@@ -78,6 +79,17 @@ function CheckIcon({ className }: IconProps) {
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
       <path d="M9 11l3 3L22 4" />
       <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+    </svg>
+  );
+}
+
+function ChartIcon({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 3v18h18" />
+      <rect x="7" y="11" width="3" height="6" />
+      <rect x="12" y="7" width="3" height="10" />
+      <rect x="17" y="13" width="3" height="4" />
     </svg>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { useStore } from "@/lib/store";
 import {
   Button,
@@ -12,7 +13,6 @@ import {
   inputClass,
 } from "@/components/ui";
 import { GroupSelector } from "@/components/GroupSelector";
-import type { Member } from "@/lib/types";
 
 type FormState = {
   firstName: string;
@@ -31,10 +31,8 @@ const empty: FormState = {
 };
 
 export default function MembresPage() {
-  const { data, ready, selectedGroupId, addMember, updateMember, deleteMember } =
-    useStore();
+  const { data, ready, selectedGroupId, addMember, deleteMember } = useStore();
   const [open, setOpen] = useState(false);
-  const [editing, setEditing] = useState<Member | null>(null);
   const [form, setForm] = useState<FormState>(empty);
 
   const members = useMemo(
@@ -60,36 +58,21 @@ export default function MembresPage() {
   }
 
   function openCreate() {
-    setEditing(null);
     setForm(empty);
-    setOpen(true);
-  }
-
-  function openEdit(m: Member) {
-    setEditing(m);
-    setForm({
-      firstName: m.firstName,
-      lastName: m.lastName,
-      jerseyNumber: m.jerseyNumber ?? "",
-      position: m.position ?? "",
-      phone: m.phone ?? "",
-    });
     setOpen(true);
   }
 
   function handleSubmit() {
     if (!form.firstName.trim() || !form.lastName.trim() || !selectedGroupId)
       return;
-    const payload = {
+    addMember({
       groupId: selectedGroupId,
       firstName: form.firstName.trim(),
       lastName: form.lastName.trim(),
       jerseyNumber: form.jerseyNumber.trim() || undefined,
       position: form.position.trim() || undefined,
       phone: form.phone.trim() || undefined,
-    };
-    if (editing) updateMember(editing.id, payload);
-    else addMember(payload);
+    });
     setOpen(false);
   }
 
@@ -127,8 +110,8 @@ export default function MembresPage() {
                   </span>
                 )}
               </div>
-              <button
-                onClick={() => openEdit(m)}
+              <Link
+                href={`/membres/${m.id}`}
                 className="min-w-0 flex-1 text-left"
               >
                 <p className="truncate font-medium text-white">
@@ -137,7 +120,7 @@ export default function MembresPage() {
                 <p className="truncate text-xs text-slate-400">
                   {[m.position, m.phone].filter(Boolean).join(" · ") || "—"}
                 </p>
-              </button>
+              </Link>
               <button
                 onClick={() => {
                   if (confirm(`Supprimer ${m.firstName} ${m.lastName} ?`))
@@ -163,11 +146,7 @@ export default function MembresPage() {
         </div>
       )}
 
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        title={editing ? "Modifier le membre" : "Nouveau membre"}
-      >
+      <Modal open={open} onClose={() => setOpen(false)} title="Nouveau membre">
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <Field label="Prénom">
@@ -224,7 +203,7 @@ export default function MembresPage() {
               onClick={handleSubmit}
               disabled={!form.firstName.trim() || !form.lastName.trim()}
             >
-              {editing ? "Enregistrer" : "Ajouter"}
+              Ajouter
             </Button>
           </div>
         </div>
