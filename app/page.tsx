@@ -3,29 +3,27 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useStore } from "@/lib/store";
-import {
-  Button,
-  Card,
-  EmptyState,
-  Field,
-  Modal,
-  PageHeader,
-  inputClass,
-} from "@/components/ui";
-import { GroupSelector } from "@/components/GroupSelector";
-import { formatDate, formatTime, isUpcoming } from "@/lib/format";
+import { Button, Field, Modal, inputClass } from "@/components/ui";
+import { pastSessions } from "@/lib/stats";
 
-const COLORS = [
-  "#10b981",
-  "#3b82f6",
-  "#f59e0b",
-  "#ef4444",
-  "#8b5cf6",
-  "#ec4899",
-];
+const COLORS = ["#f5188c", "#22d3ee", "#f59e0b", "#ef4444", "#8b5cf6", "#10b981"];
+const QUOTE = {
+  text: "Ne pratiquez pas jusqu'à ce que vous y arriviez. Pratiquez jusqu'à ce que vous ne puissiez plus vous tromper.",
+  author: "Morgan Davis",
+};
+const WEEKDAYS = ["LUN.", "MAR.", "MER.", "JEU.", "VEN.", "SAM.", "DIM."];
+
+function startOfWeek(d: Date): Date {
+  const x = new Date(d);
+  const day = (x.getDay() + 6) % 7;
+  x.setDate(x.getDate() - day);
+  x.setHours(0, 0, 0, 0);
+  return x;
+}
 
 export default function HomePage() {
-  const { data, ready, selectedGroupId, addGroup, deleteGroup } = useStore();
+  const { data, ready, selectedGroupId, setSelectedGroupId, addGroup } =
+    useStore();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [sport, setSport] = useState("");
@@ -33,18 +31,60 @@ export default function HomePage() {
 
   const group = data.groups.find((g) => g.id === selectedGroupId) ?? null;
 
-  const stats = useMemo(() => {
-    if (!group) return null;
-    const members = data.members.filter((m) => m.groupId === group.id);
-    const sessions = data.sessions.filter((s) => s.groupId === group.id);
-    const upcoming = sessions
-      .filter((s) => isUpcoming(s.date))
-      .sort((a, b) => +new Date(a.date) - +new Date(b.date));
-    return { memberCount: members.length, sessionCount: sessions.length, upcoming };
-  }, [group, data]);
+  const members = useMemo(
+    () => data.members.filter((m) => m.groupId === selectedGroupId),
+    [data.members, selectedGroupId]
+  );
+
+  // Séances de la semaine en cours, par jour
+  const week = useMemo(() => {
+    const start = startOfWeek(new Date());
+    const groupSessions = data.sessions.filter(
+      (s) => s.groupId === selectedGroupId
+    );
+    return Array.from({ length: 7 }).map((_, i) => {
+      const date = new Date(start);
+      date.setDate(start.getDate() + i);
+      const sessions = groupSessions.filter((s) => {
+        const sd = new Date(s.date);
+        return (
+          sd.getFullYear() === date.getFullYear() &&
+          sd.getMonth() === date.getMonth() &&
+          sd.getDate() === date.getDate()
+        );
+      });
+      return { date, sessions };
+    });
+  }, [data.sessions, selectedGroupId]);
+
+  // Présences agrégées sur les séances passées
+  const presence = useMemo(() => {
+    if (!selectedGroupId)
+      return { rate: 0, present: 0, slots: 0, absent: 0, excuse: 0 };
+    const past = pastSessions(data, selectedGroupId);
+    let present = 0;
+    let absent = 0;
+    let excuse = 0;
+    for (const s of past) {
+      const map = data.attendance[s.id] ?? {};
+      for (const m of members) {
+        const st = map[m.id];
+        if (st === "present") present++;
+        else if (st === "absent") absent++;
+        else if (st === "excuse") excuse++;
+      }
+    }
+    const slots = past.length * members.length;
+    const rate = slots > 0 ? Math.round((present / slots) * 100) : 0;
+    return { rate, present, slots, absent, excuse };
+  }, [data, selectedGroupId, members]);
 
   if (!ready) {
-    return <p className="text-slate-400">Chargement…</p>;
+    return (
+      <div className="min-h-screen bg-[#140d22] px-4 pt-6 text-slate-400">
+        Chargement…
+      </div>
+    );
   }
 
   function handleCreate() {
@@ -57,147 +97,174 @@ export default function HomePage() {
   }
 
   return (
-    <div>
-      <PageHeader
-        title="Tableau de bord"
-        subtitle="Vos groupes en un coup d'œil"
-        action={
-          <Button onClick={() => setOpen(true)}>
-            <span className="text-lg leading-none">+</span> Groupe
-          </Button>
-        }
-      />
+    <div className="min-h-screen bg-[#140d22] bg-[radial-gradient(1100px_500px_at_100%_-5%,rgba(245,24,140,0.18),transparent_55%),radial-gradient(900px_500px_at_-5%_0%,rgba(124,58,237,0.18),transparent_55%)] px-4 pb-28 pt-6 md:px-8 md:pb-10">
+      <div className="mx-auto max-w-6xl">
+        {/* Barre du haut */}
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+          <h1 className="text-xl font-extrabold uppercase tracking-wide text-white">
+            Tableau de bord
+          </h1>
+          {data.groups.length > 0 && (
+            <select
+              value={selectedGroupId ?? ""}
+              onChange={(e) => setSelectedGroupId(e.target.value || null)}
+              className="rounded-xl border border-[#2e2444] bg-[#1e1633] px-3 py-2 text-sm font-medium text-white focus:border-[#f5188c] focus:outline-none"
+            >
+              {data.groups.map((g) => (
+                <option key={g.id} value={g.id}>
+                  {g.name} — {g.sport}
+                </option>
+              ))}
+            </select>
+          )}
+        </div>
 
-      {data.groups.length === 0 ? (
-        <EmptyState
-          title="Bienvenue sur CoachManager 👋"
-          description="Créez votre premier groupe (équipe) pour commencer à gérer vos membres, votre calendrier et les présences."
-          action={
-            <Button onClick={() => setOpen(true)}>Créer un groupe</Button>
-          }
-        />
-      ) : (
-        <>
-          <GroupSelector />
-
-          {group && stats && (
-            <div className="space-y-6">
-              <div className="animate-rise rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                <div className="flex items-center gap-2">
-                  <span
-                    className="h-2.5 w-2.5 rounded-full"
-                    style={{ backgroundColor: group.color }}
-                  />
-                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                    {group.sport}
+        {data.groups.length === 0 ? (
+          <Panel className="animate-rise p-8 text-center">
+            <p className="text-lg font-bold text-white">
+              Bienvenue sur CoachManager 👋
+            </p>
+            <p className="mx-auto mt-1 max-w-sm text-sm text-slate-400">
+              Créez votre première équipe pour activer votre tableau de bord.
+            </p>
+            <div className="mt-4 flex justify-center">
+              <NeonButton onClick={() => setOpen(true)}>
+                Créer une équipe
+              </NeonButton>
+            </div>
+          </Panel>
+        ) : (
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+            {/* Hero profil */}
+            <Panel className="animate-rise relative overflow-hidden p-5 lg:col-span-2">
+              <div className="pointer-events-none absolute right-0 top-0 h-full w-1/2 bg-[radial-gradient(circle_at_80%_30%,rgba(245,24,140,0.35),transparent_60%)]" />
+              <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center">
+                <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full border-2 border-[#f5188c] text-[#f5188c] shadow-[0_0_25px_rgba(245,24,140,0.5)]">
+                  <svg className="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                    <circle cx="12" cy="13" r="4" />
+                  </svg>
+                </div>
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h2 className="text-2xl font-extrabold uppercase tracking-wide text-white">
+                      {group?.name}
+                    </h2>
+                    <span className="rounded-full bg-[#10b981]/20 px-2.5 py-0.5 text-xs font-semibold text-[#34d399]">
+                      {group?.sport}
+                    </span>
+                  </div>
+                  <div className="mt-1 text-[#f5188c]">★★☆☆☆</div>
+                  <p className="mt-2 text-sm italic text-slate-300">
+                    « {QUOTE.text} »
+                  </p>
+                  <p className="mt-1 text-right text-sm font-semibold text-slate-400">
+                    — {QUOTE.author}
                   </p>
                 </div>
-                <h2 className="mt-1 text-2xl font-bold tracking-tight text-slate-900">
-                  {group.name}
-                </h2>
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                  <Link
-                    href="/membres"
-                    className="rounded-xl border border-slate-200 px-4 py-3 transition-all duration-150 hover:border-slate-300 hover:bg-slate-50 active:scale-[0.98]"
-                  >
-                    <p className="text-2xl font-bold text-slate-900">
-                      {stats.memberCount}
-                    </p>
-                    <p className="text-xs font-medium text-slate-500">membres</p>
-                  </Link>
-                  <Link
-                    href="/calendrier"
-                    className="rounded-xl border border-slate-200 px-4 py-3 transition-all duration-150 hover:border-slate-300 hover:bg-slate-50 active:scale-[0.98]"
-                  >
-                    <p className="text-2xl font-bold text-slate-900">
-                      {stats.sessionCount}
-                    </p>
-                    <p className="text-xs font-medium text-slate-500">séances</p>
-                  </Link>
-                </div>
               </div>
+            </Panel>
 
-              <div
-                className="animate-rise"
-                style={{ animationDelay: "60ms" }}
-              >
-                <div className="mb-2 flex items-center justify-between">
-                  <h2 className="text-base font-semibold text-slate-900">
-                    Prochaines séances
-                  </h2>
-                  <Link
-                    href="/calendrier"
-                    className="text-sm font-medium text-blue-600 hover:underline"
-                  >
-                    Tout voir
-                  </Link>
-                </div>
-                {stats.upcoming.length === 0 ? (
-                  <EmptyState
-                    title="Aucune séance à venir"
-                    description="Planifiez un entraînement ou un match depuis le calendrier."
-                    action={
-                      <Link href="/calendrier">
-                        <Button variant="ghost">Aller au calendrier</Button>
-                      </Link>
-                    }
-                  />
-                ) : (
-                  <div className="space-y-2">
-                    {stats.upcoming.slice(0, 4).map((s, i) => (
-                      <Link
-                        key={s.id}
-                        href="/calendrier"
-                        className="animate-rise flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-150 hover:border-slate-300 hover:shadow active:scale-[0.99]"
-                        style={{ animationDelay: `${100 + i * 50}ms` }}
-                      >
-                        <span
-                          className={`shrink-0 rounded-lg px-2 py-1 text-xs font-semibold ${
-                            s.type === "match"
-                              ? "bg-amber-50 text-amber-700"
-                              : "bg-emerald-50 text-emerald-700"
-                          }`}
-                        >
-                          {s.type === "match" ? "Match" : "Entraînement"}
-                        </span>
-                        <div className="min-w-0 flex-1">
-                          <p className="truncate font-medium text-slate-900">
-                            {s.title}
-                          </p>
-                          <p className="text-xs text-slate-500">
-                            {formatDate(s.date)} · {formatTime(s.date)}
-                          </p>
-                        </div>
-                      </Link>
-                    ))}
+            {/* Nouvelle séance */}
+            <Link
+              href="/calendrier"
+              className="animate-rise group flex min-h-[160px] flex-col items-center justify-center rounded-2xl border border-[#f5188c] bg-[#1b0f24] bg-[radial-gradient(circle_at_50%_120%,rgba(245,24,140,0.35),transparent_60%)] p-5 text-center shadow-[0_0_25px_rgba(245,24,140,0.2)] transition-all duration-200 hover:shadow-[0_0_35px_rgba(245,24,140,0.4)] active:scale-[0.99]"
+            >
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#f5188c] text-3xl font-light text-white shadow-[0_0_20px_rgba(245,24,140,0.6)] transition-transform duration-200 group-hover:scale-110">
+                +
+              </span>
+              <p className="mt-3 text-lg font-extrabold uppercase tracking-wide text-white">
+                Nouvelle séance
+              </p>
+              <p className="text-xs text-slate-400">
+                Créer une séance d&apos;entraînement
+              </p>
+            </Link>
+
+            {/* Calendrier semaine */}
+            <Panel className="animate-rise p-5" style={{ animationDelay: "60ms" }}>
+              <WidgetTitle>Calendrier</WidgetTitle>
+              <div className="mt-4 grid grid-cols-7 gap-1.5">
+                {week.map(({ date, sessions }, i) => (
+                  <div key={i} className="flex flex-col items-center gap-1">
+                    <span className="text-[10px] font-medium text-slate-500">
+                      {WEEKDAYS[i]}
+                    </span>
+                    <div className="flex h-12 w-full flex-col items-center justify-center gap-1 rounded-lg bg-[#241a3a]">
+                      <span className="text-xs font-semibold text-slate-300">
+                        {date.getDate()}
+                      </span>
+                      <span className="flex gap-0.5">
+                        {sessions.slice(0, 3).map((s) => (
+                          <span
+                            key={s.id}
+                            className="h-1.5 w-1.5 rounded-full"
+                            style={{
+                              backgroundColor:
+                                s.type === "match" ? "#22d3ee" : "#f5188c",
+                            }}
+                          />
+                        ))}
+                      </span>
+                    </div>
                   </div>
-                )}
+                ))}
               </div>
-
-              <div className="pt-2">
-                <Button
-                  variant="danger"
-                  onClick={() => {
-                    if (
-                      confirm(
-                        `Supprimer le groupe « ${group.name} » et toutes ses données ?`
-                      )
-                    ) {
-                      deleteGroup(group.id);
-                    }
-                  }}
-                >
-                  Supprimer ce groupe
-                </Button>
+              <div className="mt-4 space-y-1.5 text-xs text-slate-400">
+                <Legend color="#f5188c" label="Séance d'entraînement" />
+                <Legend color="#22d3ee" label="Match / compétition" />
               </div>
-            </div>
-          )}
-        </>
-      )}
+            </Panel>
 
-      <Modal open={open} onClose={() => setOpen(false)} title="Nouveau groupe">
+            {/* Présence */}
+            <Panel className="animate-rise p-5" style={{ animationDelay: "120ms" }}>
+              <WidgetTitle>Présence</WidgetTitle>
+              <div className="mt-4 flex items-center gap-4">
+                <Donut value={presence.rate} />
+                <div className="text-sm">
+                  <p className="font-semibold text-white">
+                    {presence.present}/{presence.slots} Présent
+                  </p>
+                  <p className="mt-1 text-slate-400">
+                    {presence.absent} Absent · {presence.excuse} Excusé
+                  </p>
+                  <Link
+                    href="/presences"
+                    className="mt-2 inline-block text-xs font-semibold text-[#f5188c] hover:underline"
+                  >
+                    Faire l&apos;appel →
+                  </Link>
+                </div>
+              </div>
+            </Panel>
+
+            {/* Indicateurs clés */}
+            <Panel className="animate-rise p-5" style={{ animationDelay: "180ms" }}>
+              <WidgetTitle>Indicateurs clés</WidgetTitle>
+              <div className="mt-4 space-y-3">
+                <Indicator label="Membres" value={String(members.length)} />
+                <Indicator
+                  label="Séances planifiées"
+                  value={String(
+                    data.sessions.filter((s) => s.groupId === selectedGroupId)
+                      .length
+                  )}
+                />
+                <Indicator label="Présence moyenne" value={`${presence.rate}%`} />
+              </div>
+            </Panel>
+
+            {/* Widgets à venir */}
+            <Soon title="Charge d'entraînement" />
+            <Soon title="Évaluation" />
+            <Soon title="Footboard" />
+          </div>
+        )}
+      </div>
+
+      <Modal open={open} onClose={() => setOpen(false)} title="Nouvelle équipe">
         <div className="space-y-4">
-          <Field label="Nom du groupe">
+          <Field label="Nom de l'équipe">
             <input
               className={inputClass}
               placeholder="Ex : U15 Garçons"
@@ -222,9 +289,7 @@ export default function HomePage() {
                   type="button"
                   onClick={() => setColor(c)}
                   className={`h-8 w-8 rounded-full transition-transform ${
-                    color === c
-                      ? "scale-110 ring-2 ring-slate-900 ring-offset-2"
-                      : ""
+                    color === c ? "scale-110 ring-2 ring-slate-900 ring-offset-2" : ""
                   }`}
                   style={{ backgroundColor: c }}
                   aria-label={`Couleur ${c}`}
@@ -243,5 +308,111 @@ export default function HomePage() {
         </div>
       </Modal>
     </div>
+  );
+}
+
+function Panel({
+  children,
+  className = "",
+  style,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <div
+      className={`rounded-2xl border border-[#2a2040] bg-[#1a1230] shadow-lg ${className}`}
+      style={style}
+    >
+      {children}
+    </div>
+  );
+}
+
+function WidgetTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <h3 className="text-sm font-extrabold uppercase tracking-wide text-white">
+      {children}
+    </h3>
+  );
+}
+
+function NeonButton({
+  children,
+  onClick,
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="rounded-xl bg-[#f5188c] px-5 py-2.5 text-sm font-bold text-white shadow-[0_0_20px_rgba(245,24,140,0.5)] transition-all duration-150 hover:bg-[#ff3a9f] active:scale-95"
+    >
+      {children}
+    </button>
+  );
+}
+
+function Legend({ color, label }: { color: string; label: string }) {
+  return (
+    <p className="flex items-center gap-2">
+      <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: color }} />
+      {label}
+    </p>
+  );
+}
+
+function Indicator({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-center justify-between border-b border-[#2a2040] pb-2 last:border-0 last:pb-0">
+      <span className="text-sm text-slate-400">{label}</span>
+      <span className="text-lg font-bold text-white">{value}</span>
+    </div>
+  );
+}
+
+function Donut({ value }: { value: number }) {
+  const r = 34;
+  const c = 2 * Math.PI * r;
+  const offset = c - (value / 100) * c;
+  return (
+    <div className="relative h-24 w-24 shrink-0">
+      <svg className="h-24 w-24 -rotate-90" viewBox="0 0 80 80">
+        <circle cx="40" cy="40" r={r} fill="none" stroke="#2a2040" strokeWidth="8" />
+        <circle
+          cx="40"
+          cy="40"
+          r={r}
+          fill="none"
+          stroke="#f5188c"
+          strokeWidth="8"
+          strokeLinecap="round"
+          strokeDasharray={c}
+          strokeDashoffset={offset}
+          style={{ transition: "stroke-dashoffset 0.8s ease-out" }}
+        />
+      </svg>
+      <span className="absolute inset-0 flex items-center justify-center text-lg font-bold text-white">
+        {value}%
+      </span>
+    </div>
+  );
+}
+
+function Soon({ title }: { title: string }) {
+  return (
+    <Panel className="animate-rise flex min-h-[120px] flex-col p-5">
+      <div className="flex items-center justify-between">
+        <WidgetTitle>{title}</WidgetTitle>
+        <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-slate-400">
+          Bientôt
+        </span>
+      </div>
+      <div className="flex flex-1 items-center justify-center text-sm text-slate-500">
+        À venir
+      </div>
+    </Panel>
   );
 }

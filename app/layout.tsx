@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { StoreProvider } from "@/lib/store";
 import { Nav } from "@/components/Nav";
+import { Sidebar } from "@/components/Sidebar";
+import { MainArea } from "@/components/MainArea";
 
 export const metadata: Metadata = {
   title: "CoachManager — gérez votre équipe",
@@ -25,9 +27,12 @@ export default function RootLayout({
     <html lang="fr">
       <body className="min-h-screen antialiased">
         <StoreProvider>
-          <div className="mx-auto flex min-h-screen max-w-3xl flex-col">
-            <main className="flex-1 px-4 pb-28 pt-6">{children}</main>
-            <Nav />
+          <div className="flex min-h-screen">
+            <Sidebar />
+            <div className="flex min-w-0 flex-1 flex-col">
+              <MainArea>{children}</MainArea>
+              <Nav />
+            </div>
           </div>
         </StoreProvider>
       </body>
