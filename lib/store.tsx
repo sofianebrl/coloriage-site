@@ -11,9 +11,12 @@ import {
 import {
   type AppData,
   type AttendanceStatus,
+  type CoachProfile,
   type Group,
+  type Lineup,
   type Member,
   type Session,
+  defaultProfile,
   emptyData,
 } from "./types";
 
@@ -35,6 +38,8 @@ function loadData(): AppData {
       members: parsed.members ?? [],
       sessions: parsed.sessions ?? [],
       attendance: parsed.attendance ?? {},
+      profile: { ...defaultProfile, ...(parsed.profile ?? {}) },
+      lineups: parsed.lineups ?? {},
     };
   } catch {
     return emptyData;
@@ -55,6 +60,10 @@ interface StoreContextValue {
   addMember: (m: Omit<Member, "id">) => Member;
   updateMember: (id: string, patch: Partial<Omit<Member, "id">>) => void;
   deleteMember: (id: string) => void;
+  // Profil coach
+  updateProfile: (patch: Partial<CoachProfile>) => void;
+  // Composition d'équipe
+  setLineup: (groupId: string, lineup: Lineup) => void;
   // Séances
   addSession: (s: Omit<Session, "id">) => Session;
   updateSession: (id: string, patch: Partial<Omit<Session, "id">>) => void;
@@ -130,11 +139,15 @@ export function StoreProvider({ children }: { children: ReactNode }) {
             .map((s) => s.id);
           const attendance = { ...d.attendance };
           sessionIds.forEach((sid) => delete attendance[sid]);
+          const lineups = { ...d.lineups };
+          delete lineups[id];
           return {
+            ...d,
             groups: d.groups.filter((g) => g.id !== id),
             members: d.members.filter((m) => m.groupId !== id),
             sessions: d.sessions.filter((s) => s.groupId !== id),
             attendance,
+            lineups,
           };
         });
       },
@@ -197,6 +210,15 @@ export function StoreProvider({ children }: { children: ReactNode }) {
               [memberId]: status,
             },
           },
+        }));
+      },
+      updateProfile(patch) {
+        setData((d) => ({ ...d, profile: { ...d.profile, ...patch } }));
+      },
+      setLineup(groupId, lineup) {
+        setData((d) => ({
+          ...d,
+          lineups: { ...d.lineups, [groupId]: lineup },
         }));
       },
     };

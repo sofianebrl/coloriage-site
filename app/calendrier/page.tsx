@@ -28,6 +28,7 @@ type FormState = {
   location: string;
   opponent: string;
   notes: string;
+  intensity: number;
 };
 
 function defaultForm(): FormState {
@@ -40,6 +41,7 @@ function defaultForm(): FormState {
     location: "",
     opponent: "",
     notes: "",
+    intensity: 5,
   };
 }
 
@@ -101,6 +103,7 @@ export default function CalendrierPage() {
       location: s.location ?? "",
       opponent: s.opponent ?? "",
       notes: s.notes ?? "",
+      intensity: s.intensity ?? 5,
     });
     setOpen(true);
   }
@@ -115,6 +118,7 @@ export default function CalendrierPage() {
       location: form.location.trim() || undefined,
       opponent: form.opponent.trim() || undefined,
       notes: form.notes.trim() || undefined,
+      intensity: form.intensity,
     };
     if (editing) updateSession(editing.id, payload);
     else addSession(payload);
@@ -226,6 +230,18 @@ export default function CalendrierPage() {
               />
             </Field>
           )}
+          <Field label={`Intensité / charge : ${form.intensity}/10`}>
+            <input
+              type="range"
+              min={1}
+              max={10}
+              value={form.intensity}
+              onChange={(e) =>
+                setForm({ ...form, intensity: Number(e.target.value) })
+              }
+              className="w-full accent-[#f5188c]"
+            />
+          </Field>
           <Field label="Notes">
             <textarea
               className={inputClass}

@@ -146,6 +146,28 @@ export default function MemberDetailPage() {
         </Button>
       </div>
 
+      <Card className="animate-rise mb-6 flex items-center justify-between">
+        <span className="text-sm text-slate-400">Évaluation (niveau)</span>
+        <div className="flex gap-1">
+          {[1, 2, 3, 4, 5].map((n) => (
+            <button
+              key={n}
+              onClick={() =>
+                updateMember(member.id, {
+                  level: member.level === n ? undefined : n,
+                })
+              }
+              className={`text-2xl leading-none transition-transform active:scale-90 ${
+                n <= (member.level ?? 0) ? "text-[#f5188c]" : "text-slate-600"
+              }`}
+              aria-label={`${n} étoiles`}
+            >
+              ★
+            </button>
+          ))}
+        </div>
+      </Card>
+
       {stats && stats.total > 0 && (
         <Card className="animate-rise mb-6">
           <div className="mb-2 flex items-center justify-between">

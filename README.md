@@ -14,8 +14,17 @@ comme sur ordinateur.
   compteur de présents.
 - **Statistiques** — taux de présence par joueur sur la saison, classé du plus
   assidu au moins assidu, avec moyenne du groupe.
-- **Fiche joueur** — page dédiée par joueur : infos, bouton d'appel, taux de
-  présence et historique des séances.
+- **Fiche joueur** — page dédiée par joueur : infos, bouton d'appel, note de
+  niveau, taux de présence et historique des séances.
+- **Tableau de bord (style DYF)** — profil coach personnalisable (photo, nom,
+  rôle, citation, étoiles), widgets Calendrier semaine, Présence (donut),
+  Indicateurs clés.
+- **Charge d'entraînement** — calcul du rapport charge aiguë/chronique à partir
+  de l'intensité des séances, avec alertes (rotation conseillée / risque de
+  fatigue).
+- **Évaluation** — note de niveau par joueur et moyenne de l'effectif.
+- **Footboard** — composition d'équipe sur un terrain (formations 4-3-3,
+  4-4-2, 3-5-2).
 - **Installable** — fonctionne comme une appli (PWA) sur téléphone.
 
 ## Stack technique
