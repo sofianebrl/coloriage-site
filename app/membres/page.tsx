@@ -100,10 +100,10 @@ export default function MembresPage() {
           {members.map((m, i) => (
             <div
               key={m.id}
-              className="animate-rise flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-150 hover:border-slate-300 hover:shadow"
+              className="animate-rise flex items-center gap-3 rounded-2xl border border-[#2a2040] bg-[#1a1230] p-4 shadow-lg transition-all duration-150 hover:border-[#3a2e55]"
               style={{ animationDelay: `${i * 40}ms` }}
             >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-100 text-sm font-bold text-slate-700">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#241a3a] text-sm font-bold text-slate-200">
                 {m.jerseyNumber ? (
                   m.jerseyNumber
                 ) : (
@@ -117,10 +117,10 @@ export default function MembresPage() {
                 href={`/membres/${m.id}`}
                 className="min-w-0 flex-1 text-left"
               >
-                <p className="truncate font-medium text-slate-900">
+                <p className="truncate font-medium text-white">
                   {m.firstName} {m.lastName}
                 </p>
-                <p className="truncate text-xs text-slate-500">
+                <p className="truncate text-xs text-slate-400">
                   {[m.position, m.phone].filter(Boolean).join(" · ") || "—"}
                 </p>
               </Link>
@@ -129,7 +129,7 @@ export default function MembresPage() {
                   if (confirm(`Supprimer ${m.firstName} ${m.lastName} ?`))
                     deleteMember(m.id);
                 }}
-                className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-red-50 hover:text-red-600"
+                className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-red-500/10 hover:text-red-400"
                 aria-label="Supprimer"
               >
                 <svg

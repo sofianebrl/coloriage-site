@@ -289,7 +289,9 @@ export default function HomePage() {
                   type="button"
                   onClick={() => setColor(c)}
                   className={`h-8 w-8 rounded-full transition-transform ${
-                    color === c ? "scale-110 ring-2 ring-slate-900 ring-offset-2" : ""
+                    color === c
+                      ? "scale-110 ring-2 ring-white ring-offset-2 ring-offset-[#1a1230]"
+                      : ""
                   }`}
                   style={{ backgroundColor: c }}
                   aria-label={`Couleur ${c}`}

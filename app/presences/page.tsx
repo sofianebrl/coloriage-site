@@ -88,13 +88,13 @@ export default function PresencesPage() {
       ) : (
         <>
           <div className="mb-4">
-            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-400">
+            <label className="mb-1 block text-xs font-medium uppercase tracking-wide text-slate-500">
               Séance
             </label>
             <select
               value={sessionId}
               onChange={(e) => setSessionId(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-900 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
+              className="w-full rounded-xl border border-[#2e2444] bg-[#1e1633] px-3 py-2 text-sm font-medium text-white transition-colors focus:border-[#f5188c] focus:ring-2 focus:ring-[#f5188c]/25 focus:outline-none"
             >
               {sessions.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -106,8 +106,8 @@ export default function PresencesPage() {
           </div>
 
           <Card className="mb-4 flex items-center justify-between">
-            <span className="text-sm text-slate-500">Présents</span>
-            <span className="text-lg font-bold text-emerald-600">
+            <span className="text-sm text-slate-400">Présents</span>
+            <span className="text-lg font-bold text-emerald-400">
               {presentCount}/{members.length}
             </span>
           </Card>
@@ -122,11 +122,11 @@ export default function PresencesPage() {
                   style={{ animationDelay: `${i * 35}ms` }}
                 >
                   <div className="min-w-0 flex-1">
-                    <p className="truncate font-medium text-slate-900">
+                    <p className="truncate font-medium text-white">
                       {m.firstName} {m.lastName}
                     </p>
                     {m.jerseyNumber && (
-                      <p className="text-xs text-slate-500">
+                      <p className="text-xs text-slate-400">
                         N°{m.jerseyNumber}
                       </p>
                     )}
@@ -145,7 +145,7 @@ export default function PresencesPage() {
                         className={`rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-all duration-150 active:scale-95 ${
                           status === opt.key
                             ? opt.active
-                            : "bg-slate-100 text-slate-500 hover:bg-slate-200"
+                            : "bg-white/5 text-slate-400 hover:bg-white/10"
                         }`}
                       >
                         {opt.label}

@@ -60,16 +60,16 @@ export default function StatsPage() {
         <>
           <div className="mb-5 grid grid-cols-2 gap-3">
             <Card className="animate-rise">
-              <p className="text-3xl font-extrabold text-slate-900">
+              <p className="text-3xl font-extrabold text-white">
                 {totalSessions}
               </p>
-              <p className="text-sm text-slate-500">séances passées</p>
+              <p className="text-sm text-slate-400">séances passées</p>
             </Card>
-            <Card className="animate-rise" >
-              <p className="text-3xl font-extrabold text-blue-600">
+            <Card className="animate-rise">
+              <p className="text-3xl font-extrabold text-[#f5188c]">
                 {average}%
               </p>
-              <p className="text-sm text-slate-500">présence moyenne</p>
+              <p className="text-sm text-slate-400">présence moyenne</p>
             </Card>
           </div>
 
@@ -81,19 +81,19 @@ export default function StatsPage() {
                 className="animate-rise block"
                 style={{ animationDelay: `${i * 50}ms` }}
               >
-                <Card className="transition-all duration-150 hover:border-slate-300 hover:shadow active:scale-[0.99]">
+                <Card className="transition-all duration-150 hover:border-[#3a2e55] active:scale-[0.99]">
                   <div className="mb-2 flex items-center gap-3">
-                    <span className="w-5 text-center text-sm font-bold text-slate-400">
+                    <span className="w-5 text-center text-sm font-bold text-slate-500">
                       {i + 1}
                     </span>
-                    <span className="min-w-0 flex-1 truncate font-medium text-slate-900">
+                    <span className="min-w-0 flex-1 truncate font-medium text-white">
                       {s.member.firstName} {s.member.lastName}
                     </span>
-                    <span className="text-sm font-bold text-slate-900">
+                    <span className="text-sm font-bold text-white">
                       {s.rate}%
                     </span>
                   </div>
-                  <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
+                  <div className="h-2 w-full overflow-hidden rounded-full bg-[#241a3a]">
                     <div
                       className={`h-full rounded-full transition-[width] duration-700 ease-out ${rateColor(
                         s.rate
@@ -101,7 +101,7 @@ export default function StatsPage() {
                       style={{ width: `${s.rate}%` }}
                     />
                   </div>
-                  <p className="mt-1.5 text-xs text-slate-500">
+                  <p className="mt-1.5 text-xs text-slate-400">
                     {s.present} présent{s.present > 1 ? "s" : ""} · {s.absent}{" "}
                     absent{s.absent > 1 ? "s" : ""} · {s.excuse} excusé
                     {s.excuse > 1 ? "s" : ""}

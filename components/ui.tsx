@@ -14,10 +14,10 @@ export function PageHeader({
   return (
     <div className="animate-rise mb-6 flex items-start justify-between gap-4">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+        <h1 className="text-2xl font-extrabold uppercase tracking-wide text-white">
           {title}
         </h1>
-        {subtitle && <p className="mt-1 text-sm text-slate-500">{subtitle}</p>}
+        {subtitle && <p className="mt-1 text-sm text-slate-400">{subtitle}</p>}
       </div>
       {action}
     </div>
@@ -35,7 +35,7 @@ export function Card({
 }) {
   return (
     <div
-      className={`rounded-2xl border border-slate-200 bg-white p-4 shadow-sm ${className}`}
+      className={`rounded-2xl border border-[#2a2040] bg-[#1a1230] p-4 shadow-lg ${className}`}
       style={style}
     >
       {children}
@@ -53,10 +53,10 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="animate-rise rounded-2xl border border-dashed border-slate-300 bg-white/60 p-8 text-center">
-      <p className="font-semibold text-slate-800">{title}</p>
+    <div className="animate-rise rounded-2xl border border-dashed border-[#3a2e55] bg-[#1a1230]/50 p-8 text-center">
+      <p className="font-semibold text-white">{title}</p>
       {description && (
-        <p className="mx-auto mt-1 max-w-sm text-sm text-slate-500">
+        <p className="mx-auto mt-1 max-w-sm text-sm text-slate-400">
           {description}
         </p>
       )}
@@ -84,11 +84,11 @@ export function Button({
 }: ButtonProps) {
   const styles = {
     primary:
-      "bg-blue-600 text-white hover:bg-blue-700 shadow-sm disabled:opacity-50",
+      "bg-[#f5188c] text-white hover:bg-[#ff3a9f] shadow-[0_0_18px_rgba(245,24,140,0.45)] disabled:opacity-50 disabled:shadow-none",
     ghost:
-      "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 disabled:opacity-50",
+      "bg-white/5 text-slate-200 border border-[#2e2444] hover:bg-white/10 disabled:opacity-50",
     danger:
-      "bg-white text-red-600 border border-red-200 hover:bg-red-50 disabled:opacity-50",
+      "bg-red-500/10 text-red-300 border border-red-500/30 hover:bg-red-500/20 disabled:opacity-50",
   }[variant];
 
   return (
@@ -117,18 +117,20 @@ export function Modal({
   if (!open) return null;
   return (
     <div
-      className="animate-fade-in fixed inset-0 z-30 flex items-end justify-center bg-slate-900/30 p-0 backdrop-blur-sm sm:items-center sm:p-4"
+      className="animate-fade-in fixed inset-0 z-30 flex items-end justify-center bg-black/60 p-0 backdrop-blur-sm sm:items-center sm:p-4"
       onClick={onClose}
     >
       <div
-        className="animate-slide-up w-full max-w-md rounded-t-3xl border border-slate-200 bg-white p-5 shadow-xl sm:rounded-2xl"
+        className="animate-slide-up w-full max-w-md rounded-t-3xl border border-[#2e2444] bg-[#1a1230] p-5 shadow-2xl sm:rounded-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-slate-900">{title}</h2>
+          <h2 className="text-lg font-bold uppercase tracking-wide text-white">
+            {title}
+          </h2>
           <button
             onClick={onClose}
-            className="rounded-lg p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700"
+            className="rounded-lg p-1 text-slate-400 transition-colors hover:bg-white/10 hover:text-white"
             aria-label="Fermer"
           >
             <svg
@@ -158,7 +160,7 @@ export function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-slate-700">
+      <span className="mb-1 block text-sm font-medium text-slate-300">
         {label}
       </span>
       {children}
@@ -167,4 +169,4 @@ export function Field({
 }
 
 export const inputClass =
-  "w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none";
+  "w-full rounded-xl border border-[#2e2444] bg-[#241a3a] px-3 py-2 text-sm text-white placeholder:text-slate-500 transition-colors focus:border-[#f5188c] focus:ring-2 focus:ring-[#f5188c]/25 focus:outline-none";

@@ -68,17 +68,17 @@ export function MonthCalendar({
       <div className="mb-3 flex items-center justify-between">
         <button
           onClick={() => setView(new Date(year, month - 1, 1))}
-          className="rounded-lg px-3 py-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
+          className="rounded-lg px-3 py-2 text-slate-400 transition-colors hover:bg-white/5 hover:text-white"
           aria-label="Mois précédent"
         >
           ‹
         </button>
-        <span className="font-semibold capitalize text-slate-900">
+        <span className="font-semibold capitalize text-white">
           {MONTHS[month]} {year}
         </span>
         <button
           onClick={() => setView(new Date(year, month + 1, 1))}
-          className="rounded-lg px-3 py-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
+          className="rounded-lg px-3 py-2 text-slate-400 transition-colors hover:bg-white/5 hover:text-white"
           aria-label="Mois suivant"
         >
           ›
@@ -89,7 +89,7 @@ export function MonthCalendar({
         {WEEKDAYS.map((w, i) => (
           <div
             key={i}
-            className="py-1 text-center text-xs font-medium text-slate-400"
+            className="py-1 text-center text-xs font-medium text-slate-500"
           >
             {w}
           </div>
@@ -108,10 +108,10 @@ export function MonthCalendar({
               onClick={() => setSelected(d)}
               className={`flex aspect-square flex-col items-center justify-start rounded-lg p-1 text-sm transition-all duration-150 active:scale-95 ${
                 isSelected
-                  ? "bg-blue-600 text-white shadow-sm"
+                  ? "bg-[#f5188c] text-white shadow-[0_0_14px_rgba(245,24,140,0.4)]"
                   : isToday
-                  ? "bg-blue-50 text-blue-700"
-                  : "text-slate-600 hover:bg-slate-100"
+                  ? "bg-[#f5188c]/15 text-[#ff7ac0]"
+                  : "text-slate-300 hover:bg-white/5"
               }`}
             >
               <span className={isToday && !isSelected ? "font-bold" : ""}>
@@ -125,8 +125,8 @@ export function MonthCalendar({
                       isSelected
                         ? "bg-white"
                         : s.type === "match"
-                        ? "bg-amber-500"
-                        : "bg-emerald-500"
+                        ? "bg-[#22d3ee]"
+                        : "bg-[#f5188c]"
                     }`}
                   />
                 ))}
@@ -137,7 +137,7 @@ export function MonthCalendar({
       </div>
 
       <div className="mt-4">
-        <h3 className="mb-2 text-sm font-semibold capitalize text-slate-700">
+        <h3 className="mb-2 text-sm font-semibold capitalize text-slate-300">
           {selected.toLocaleDateString("fr-FR", {
             weekday: "long",
             day: "numeric",
@@ -145,7 +145,7 @@ export function MonthCalendar({
           })}
         </h3>
         {selectedSessions.length === 0 ? (
-          <p className="text-sm text-slate-400">Aucune séance ce jour.</p>
+          <p className="text-sm text-slate-500">Aucune séance ce jour.</p>
         ) : (
           <div className="space-y-2">
             {selectedSessions.map((s) => (
@@ -157,16 +157,16 @@ export function MonthCalendar({
                   <span
                     className={`rounded px-1.5 py-0.5 text-[10px] font-semibold ${
                       s.type === "match"
-                        ? "bg-amber-50 text-amber-700"
-                        : "bg-emerald-50 text-emerald-700"
+                        ? "bg-[#22d3ee]/15 text-[#67e8f9]"
+                        : "bg-[#f5188c]/15 text-[#ff7ac0]"
                     }`}
                   >
                     {s.type === "match" ? "MATCH" : "ENTR."}
                   </span>
-                  <span className="min-w-0 flex-1 truncate font-medium text-slate-900">
+                  <span className="min-w-0 flex-1 truncate font-medium text-white">
                     {s.title}
                   </span>
-                  <span className="text-xs text-slate-500">
+                  <span className="text-xs text-slate-400">
                     {formatTime(s.date)}
                   </span>
                 </button>

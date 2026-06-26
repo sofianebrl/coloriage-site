@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f8fa;
+  --background: #140d22;
 }
 
 html {
@@ -9,8 +9,12 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: #0f172a;
+  background:
+    radial-gradient(1100px 500px at 100% -5%, rgba(245, 24, 140, 0.16), transparent 55%),
+    radial-gradient(900px 500px at -5% 0%, rgba(124, 58, 237, 0.16), transparent 55%),
+    var(--background);
+  background-attachment: fixed;
+  color: #e2e8f0;
 }
 
 @keyframes fade-in {

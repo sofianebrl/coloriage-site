@@ -17,10 +17,10 @@ import { formatDate, formatTime } from "@/lib/format";
 import type { AttendanceStatus } from "@/lib/types";
 
 const STATUS_LABEL: Record<AttendanceStatus, { label: string; cls: string }> = {
-  present: { label: "Présent", cls: "bg-emerald-50 text-emerald-700" },
-  absent: { label: "Absent", cls: "bg-red-50 text-red-700" },
-  excuse: { label: "Excusé", cls: "bg-amber-50 text-amber-700" },
-  inconnu: { label: "Non pointé", cls: "bg-slate-100 text-slate-500" },
+  present: { label: "Présent", cls: "bg-emerald-500/15 text-emerald-300" },
+  absent: { label: "Absent", cls: "bg-red-500/15 text-red-300" },
+  excuse: { label: "Excusé", cls: "bg-amber-500/15 text-amber-300" },
+  inconnu: { label: "Non pointé", cls: "bg-white/5 text-slate-400" },
 };
 
 export default function MemberDetailPage() {
@@ -98,13 +98,13 @@ export default function MemberDetailPage() {
     <div>
       <Link
         href="/membres"
-        className="text-sm font-medium text-blue-600 hover:underline"
+        className="text-sm font-medium text-[#f5188c] hover:underline"
       >
         ← Retour aux membres
       </Link>
 
       <div className="animate-rise mb-6 mt-4 flex items-center gap-4">
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xl font-bold text-slate-700">
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-[#f5188c] bg-[#241a3a] text-xl font-bold text-white shadow-[0_0_18px_rgba(245,24,140,0.4)]">
           {member.jerseyNumber || (
             <span>
               {member.firstName[0]}
@@ -113,10 +113,10 @@ export default function MemberDetailPage() {
           )}
         </div>
         <div className="min-w-0 flex-1">
-          <h1 className="truncate text-2xl font-bold tracking-tight text-slate-900">
+          <h1 className="truncate text-2xl font-extrabold uppercase tracking-wide text-white">
             {member.firstName} {member.lastName}
           </h1>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-slate-400">
             {[member.position, member.jerseyNumber && `N°${member.jerseyNumber}`]
               .filter(Boolean)
               .join(" · ") || "—"}
@@ -149,18 +149,18 @@ export default function MemberDetailPage() {
       {stats && stats.total > 0 && (
         <Card className="animate-rise mb-6">
           <div className="mb-2 flex items-center justify-between">
-            <span className="text-sm text-slate-500">Taux de présence</span>
-            <span className="text-lg font-bold text-emerald-600">
+            <span className="text-sm text-slate-400">Taux de présence</span>
+            <span className="text-lg font-bold text-[#f5188c]">
               {stats.rate}%
             </span>
           </div>
-          <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
+          <div className="h-2 w-full overflow-hidden rounded-full bg-[#241a3a]">
             <div
-              className="h-full rounded-full bg-emerald-500 transition-[width] duration-700 ease-out"
+              className="h-full rounded-full bg-[#f5188c] transition-[width] duration-700 ease-out"
               style={{ width: `${stats.rate}%` }}
             />
           </div>
-          <p className="mt-2 text-xs text-slate-500">
+          <p className="mt-2 text-xs text-slate-400">
             {stats.present} présent{stats.present > 1 ? "s" : ""} · {stats.absent}{" "}
             absent{stats.absent > 1 ? "s" : ""} · {stats.excuse} excusé
             {stats.excuse > 1 ? "s" : ""} sur {stats.total} séance
@@ -169,7 +169,7 @@ export default function MemberDetailPage() {
         </Card>
       )}
 
-      <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
+      <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-500">
         Historique des présences
       </h2>
       {history.length === 0 ? (
@@ -186,10 +186,10 @@ export default function MemberDetailPage() {
               style={{ animationDelay: `${i * 40}ms` }}
             >
               <div className="min-w-0 flex-1">
-                <p className="truncate font-medium text-slate-900">
+                <p className="truncate font-medium text-white">
                   {session.title}
                 </p>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-400">
                   {formatDate(session.date)} · {formatTime(session.date)}
                 </p>
               </div>
